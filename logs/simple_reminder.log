@@ -1,0 +1,41 @@
+2025-03-26 00:57:07 DEBUG SimpleReminderBot:20 - dfdfg
+2025-03-26 01:01:00 DEBUG SimpleReminderBot:21 - hello
+2025-03-26 01:25:13 DEBUG SimpleReminderBot:23 - Hello
+2025-03-26 01:25:20 DEBUG SimpleReminderBot:23 - fdgdf
+2025-03-26 21:57:34 DEBUG SimpleReminderBot:22 - fghfgh
+2025-03-26 23:00:32 DEBUG SimpleReminderBot:25 - rgsdrg
+2025-03-26 23:05:24 DEBUG SimpleReminderBot:27 - Привет
+2025-03-26 23:25:58 DEBUG SimpleReminderBot:46 - /start
+2025-03-26 23:26:08 DEBUG SimpleReminderBot:46 - /start
+2025-03-26 23:26:15 DEBUG SimpleReminderBot:46 - /mydata
+2025-03-26 23:30:33 DEBUG SimpleReminderBot:46 - /start
+2025-03-26 23:30:35 DEBUG SimpleReminderBot:46 - /mydata
+2025-03-26 23:57:04 ERROR SimpleReminderBot:38 - Error executing org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands query: [404] Not Found
+2025-03-27 00:01:52 ERROR SimpleReminderBot:38 - Error executing org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands query: [404] Not Found
+2025-03-27 00:01:52 ERROR BotInitializer:26 - Bot token and username can't be empty
+2025-03-27 00:16:10 DEBUG SimpleReminderBot:46 - /help
+2025-03-27 00:16:13 DEBUG SimpleReminderBot:46 - /start
+2025-03-27 00:16:15 DEBUG SimpleReminderBot:46 - fdvjkdf
+2025-03-27 00:36:06 DEBUG SimpleReminderBot:44 - /help
+2025-03-27 00:36:08 DEBUG SimpleReminderBot:44 - /settings
+2025-03-27 00:36:09 DEBUG SimpleReminderBot:44 - /start
+2025-03-27 00:36:16 DEBUG SimpleReminderBot:44 - /start
+2025-03-27 23:43:03 DEBUG SimpleReminderBot:46 - /mydata
+2025-03-27 23:43:35 DEBUG SimpleReminderBot:46 - /start
+2025-03-27 23:43:38 DEBUG SimpleReminderBot:46 - /mydata
+2025-03-27 23:43:43 DEBUG SimpleReminderBot:46 - /help
+2025-03-27 23:43:43 DEBUG SimpleReminderBot:46 - /start
+2025-03-27 23:43:55 DEBUG SimpleReminderBot:46 - /mydata
+2025-03-27 23:45:40 DEBUG SimpleReminderBot:46 - /start
+2025-03-27 23:45:43 DEBUG SimpleReminderBot:46 - /mydata
+2025-03-27 23:45:46 DEBUG SimpleReminderBot:46 - /deletedata
+2025-03-27 23:45:49 DEBUG SimpleReminderBot:46 - /help
+2025-03-27 23:45:52 DEBUG SimpleReminderBot:46 - /settings
+2025-03-27 23:46:04 DEBUG SimpleReminderBot:46 - Хахахах
+2025-03-27 23:46:04 DEBUG SimpleReminderBot:46 - Привет
+2025-03-27 23:46:10 DEBUG SimpleReminderBot:46 - /start
+2025-03-27 23:46:10 DEBUG SimpleReminderBot:46 - Как дела?
+2025-03-28 01:16:39 DEBUG SimpleReminderBot:46 - /start
+2025-03-28 01:16:42 DEBUG SimpleReminderBot:46 - /mydata
+2025-03-28 01:16:48 DEBUG SimpleReminderBot:46 - привет
+2025-03-28 01:16:58 DEBUG SimpleReminderBot:46 - Вы ввели
