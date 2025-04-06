@@ -1,0 +1,15 @@
+mainmenu:
+  commands:
+    - /create_reminder
+    - /my_reminders
+    - /delete_all_reminders
+    - /help
+    - /terminate_bot
+    - /description
+  descriptions:
+    /create_reminder: Создать напоминание
+    /my_reminders: Вывести список напоминаний
+    /delete_all_reminders: Удалить все напоминания
+    /help: Справка по управлению ботом
+    /terminate_bot: Завершить работу бота
+    /description: Описание
