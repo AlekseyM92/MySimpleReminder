@@ -1,38 +1,115 @@
 package com.amikhaylov.mysimplereminder.service;
 
+import com.amikhaylov.mysimplereminder.cache.BotStatus;
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
-import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
-import org.telegram.telegrambots.meta.api.objects.Chat;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessages;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Voice;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
 import java.io.File;
+import java.util.List;
+
+@Log4j
 @Component
-@NoArgsConstructor
 public class VoiceHandlerImpl implements VoiceHandler {
+
+    private final String filepath;
+
+    @Autowired
+    public VoiceHandlerImpl(@Value("${srb.filepath}") String filepath) {
+        this.filepath = filepath;
+    }
+
     @Override
-    public void handleVoice(Chat chat, Voice voice, SimpleReminderBot simpleReminderBot) throws TelegramApiException {
-        if (chat == null) {
-            throw new TelegramApiException("Chat is null");
+    public void handleVoice(Message message, SimpleReminderBot simpleReminderBot) throws TelegramApiException {
+        if (message == null) {
+            throw new TelegramApiException("message is null");
         } else if (simpleReminderBot == null) {
             throw new TelegramApiException("SimpleReminderBot is null");
-        } else if (voice == null) {
+        } else if (message.getVoice() == null) {
             throw new TelegramApiException("Voice is null");
+        } else if (message.getChat() == null) {
+            throw new TelegramApiException("Chat is null");
         }
 
-        Long chatId = chat.getId();
-        SendVoice sendVoice = new SendVoice();
-        GetFile getfile = new GetFile(voice.getFileId());
-        var filePath = simpleReminderBot.execute(getfile);
-        simpleReminderBot.downloadFile(filePath, new File("C:\\test\\new_downloaded_file.ogg"));
-        sendVoice.setChatId(chatId.toString());
-        sendVoice.setVoice(new InputFile(new File("C:\\test\\new_downloaded_file.ogg")));
-        simpleReminderBot.execute(sendVoice);
+        if (simpleReminderBot.getUserDataCache().getUserState(message.getChatId()) == BotStatus.CREATE_REMINDER) {
+            if (message.getVoice().getDuration() > 120) {
+                deleteMessage(message, simpleReminderBot);
+                sendErrorMessage(message, "Длительность голосового сообщения не должна превышать 2 минуты!"
+                        , simpleReminderBot);
+            } else {
+                simpleReminderBot.getUserDataCache().setUserState(message.getChatId()
+                        , BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER);
+            }
+
+        } else if (simpleReminderBot.getUserDataCache()
+                .getUserState(message.getChatId()) == BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER) {
+            deleteMessage(message, simpleReminderBot);
+            sendErrorMessage(message, "Вы уже отправили сообщение!\nНажмите \"Далее\"" +
+                    " для продолжения или \"Отмена\" для выхода из режима создания напоминания.", simpleReminderBot);
+        }
+    }
+
+    private void sendErrorMessage(Message message, String answer, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException {
+        if (simpleReminderBot.getUserDataCache().errorMessageIsPresent(message.getChat())) {
+            deleteMessage(simpleReminderBot.getUserDataCache().getUserErrorMessage(message.getChat())
+                    , simpleReminderBot);
+            simpleReminderBot.getUserDataCache()
+                    .setUserErrorMessage(sendAnswerMessage(message, answer, simpleReminderBot));
+        } else {
+            simpleReminderBot.getUserDataCache()
+                    .setUserErrorMessage(sendAnswerMessage(message, answer, simpleReminderBot));
+        }
+    }
+
+    public void sendAnswerVoice(Message message, String path, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException {
+        simpleReminderBot.execute(SendVoice.builder()
+                .chatId(message.getChatId())
+                .voice(new InputFile(new File(path)))
+                .build()
+        );
+    }
+
+    public void downloadAndSaveFile(Message message, String path, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException {
+        var filePath = simpleReminderBot.execute(new GetFile(message.getVoice().getFileId()));
+        simpleReminderBot.downloadFile(filePath, new File(path));
+    }
+
+    private Message sendAnswerMessage(Message message, String answer, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException {
+        return simpleReminderBot.execute(SendMessage.builder()
+                .chatId(message.getChatId())
+                .text(answer)
+                .build());
+    }
+
+    private void deleteMessage(Message message, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException {
+        simpleReminderBot.execute(DeleteMessage.builder()
+                .chatId(message.getChatId())
+                .messageId(message.getMessageId())
+                .build()
+        );
+    }
+
+    private void deleteMessages(Long chatId, List<Integer> messageIds, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException {
+        simpleReminderBot.execute(DeleteMessages.builder()
+                .chatId(chatId)
+                .messageIds(messageIds)
+                .build()
+        );
     }
 }

@@ -2,6 +2,8 @@ package com.amikhaylov.mysimplereminder.service;
 
 import com.amikhaylov.mysimplereminder.cache.BotStatus;
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
+import com.amikhaylov.mysimplereminder.keyboards.ReminderInlineKeyboards;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -11,6 +13,13 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
 public class CallbackHandlerImpl implements CallbackHandler {
+    private final ReminderInlineKeyboards reminderInlineKeyboards;
+
+    @Autowired
+    public CallbackHandlerImpl(ReminderInlineKeyboards reminderInlineKeyboards) {
+        this.reminderInlineKeyboards = reminderInlineKeyboards;
+    }
+
     @Override
     public void handleCallback(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot)
             throws TelegramApiException {
@@ -21,30 +30,58 @@ public class CallbackHandlerImpl implements CallbackHandler {
         }
         var callbackData = callbackQuery.getData();
         if (callbackData != null) {
+            AnswerCallbackQuery answerCallbackQuery;
             switch (callbackData) {
                 case "cancel":
                     simpleReminderBot.getUserDataCache()
                             .setUserState(callbackQuery.getMessage().getChatId(), BotStatus.DEFAULT);
-                    AnswerCallbackQuery answerCallbackQuery = AnswerCallbackQuery.builder()
+                    answerCallbackQuery = AnswerCallbackQuery.builder()
                             .callbackQueryId(callbackQuery.getId()).build();
                     simpleReminderBot.execute(answerCallbackQuery);
                     simpleReminderBot.execute(SendMessage.builder()
-                            .chatId(callbackQuery.getMessage().getChatId())
-                            .text("Отмена")
-                            .build()
+                            .chatId(callbackQuery.getMessage().getChatId()).text("Отмена").build()
                     );
                     simpleReminderBot.execute(SendMessage.builder()
                             .chatId(callbackQuery.getMessage().getChatId())
                             .text("Для создания напоминания выберете команду /create_reminder.\n"
                                     + "Для вызова подсказки по управлению ботом выберете команду /help\n"
-                                    + "Для вывода описания функционала бота выберете команду /description.")
-                            .build()
+                                    + "Для вывода описания функционала бота выберете команду /description.").build()
                     );
                     simpleReminderBot.execute(DeleteMessage.builder()
                             .messageId(callbackQuery.getMessage().getMessageId())
                             .chatId(callbackQuery.getMessage().getChatId())
                             .build()
                     );
+                    break;
+                case "next_step":
+                    answerCallbackQuery = AnswerCallbackQuery.builder()
+                            .callbackQueryId(callbackQuery.getId())
+                            .build();
+                    simpleReminderBot.execute(answerCallbackQuery);
+                    simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
+                            , BotStatus.WAITING_FOR_APPLY_DAY);
+                    simpleReminderBot.execute(DeleteMessage.builder()
+                            .messageId(callbackQuery.getMessage().getMessageId())
+                            .chatId(callbackQuery.getMessage().getChatId())
+                            .build()
+                    );
+                    simpleReminderBot.execute(SendMessage.builder().chatId(callbackQuery.getMessage().getChatId())
+                            .text("Выберете день месяца и нажмите готово")
+                            .replyMarkup(reminderInlineKeyboards.getKeyboard("31_days"))
+                            .build());
+                    break;
+                case "invalidTextCommands":
+                    answerCallbackQuery = AnswerCallbackQuery.builder()
+                            .callbackQueryId(callbackQuery.getId())
+                            .text("Отправка команд в режиме создания напоминания запрещена!" +
+                                    " Нажмете \"Отмена\" для выхода из данного режима.").showAlert(true).build();
+                    simpleReminderBot.execute(answerCallbackQuery);
+                    break;
+                case "textIsEmpty":
+                    answerCallbackQuery = AnswerCallbackQuery.builder()
+                            .callbackQueryId(callbackQuery.getId())
+                            .text("Сообщение не может быть пустым!").showAlert(true).build();
+                    simpleReminderBot.execute(answerCallbackQuery);
                     break;
             }
         }

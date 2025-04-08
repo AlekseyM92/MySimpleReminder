@@ -10,7 +10,7 @@ import java.util.Map;
 @Component
 @ConfigurationProperties(prefix = "mainmenu")
 @Data
-public class PropertiesConfig {
+public class YamlPropertiesConfig {
     private List<String> commands;
     private Map<String, String> descriptions;
 }
