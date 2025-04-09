@@ -54,21 +54,33 @@ public class CallbackHandlerImpl implements CallbackHandler {
                     );
                     break;
                 case "next_step":
-                    answerCallbackQuery = AnswerCallbackQuery.builder()
-                            .callbackQueryId(callbackQuery.getId())
-                            .build();
-                    simpleReminderBot.execute(answerCallbackQuery);
-                    simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
-                            , BotStatus.WAITING_FOR_APPLY_DAY);
-                    simpleReminderBot.execute(DeleteMessage.builder()
-                            .messageId(callbackQuery.getMessage().getMessageId())
-                            .chatId(callbackQuery.getMessage().getChatId())
-                            .build()
-                    );
-                    simpleReminderBot.execute(SendMessage.builder().chatId(callbackQuery.getMessage().getChatId())
-                            .text("Выберете день месяца и нажмите готово")
-                            .replyMarkup(reminderInlineKeyboards.getKeyboard("31_days"))
-                            .build());
+                    if (simpleReminderBot.getUserDataCache().getUserState(callbackQuery.getMessage().getChatId())
+                            == BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER) {
+                        answerCallbackQuery = AnswerCallbackQuery.builder()
+                                .callbackQueryId(callbackQuery.getId())
+                                .build();
+                        simpleReminderBot.execute(answerCallbackQuery);
+                        simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
+                                , BotStatus.WAITING_FOR_APPLY_MONTH);
+                        simpleReminderBot.execute(DeleteMessage.builder()
+                                .messageId(callbackQuery.getMessage().getMessageId())
+                                .chatId(callbackQuery.getMessage().getChatId())
+                                .build()
+                        );
+                        reminderInlineKeyboards.refreshKeyboards();
+                        simpleReminderBot.execute(SendMessage.builder().chatId(callbackQuery.getMessage().getChatId())
+                                .text("Выберите месяц и нажмите \"Далее\"")
+                                .replyMarkup(reminderInlineKeyboards.getKeyboard("months"))
+                                .build());
+                    } else {
+                        answerCallbackQuery = AnswerCallbackQuery.builder()
+                                .callbackQueryId(callbackQuery.getId())
+                                .showAlert(true)
+                                .text("Сначала отправьте сообщение,\n" +
+                                        "затем нажмите \"Далее\"!")
+                                .build();
+                        simpleReminderBot.execute(answerCallbackQuery);
+                    }
                     break;
                 case "invalidTextCommands":
                     answerCallbackQuery = AnswerCallbackQuery.builder()
