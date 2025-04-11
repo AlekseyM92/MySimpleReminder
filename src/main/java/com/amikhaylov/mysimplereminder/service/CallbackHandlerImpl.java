@@ -9,7 +9,13 @@ import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 @Component
 public class CallbackHandlerImpl implements CallbackHandler {
@@ -41,6 +47,13 @@ public class CallbackHandlerImpl implements CallbackHandler {
                     simpleReminderBot.execute(SendMessage.builder()
                             .chatId(callbackQuery.getMessage().getChatId()).text("Отмена").build()
                     );
+                    if (simpleReminderBot.getUserDataCache()
+                            .errorMessageIsPresent(callbackQuery.getMessage().getChatId())) {
+                        this.deleteMessage(simpleReminderBot.getUserDataCache()
+                                .getUserErrorMessage(callbackQuery.getMessage().getChatId()), simpleReminderBot);
+                        simpleReminderBot.getUserDataCache()
+                                .deleteUserErrorMessage(callbackQuery.getMessage().getChatId());
+                    }
                     simpleReminderBot.execute(SendMessage.builder()
                             .chatId(callbackQuery.getMessage().getChatId())
                             .text("Для создания напоминания выберете команду /create_reminder.\n"
@@ -61,13 +74,20 @@ public class CallbackHandlerImpl implements CallbackHandler {
                                 .build();
                         simpleReminderBot.execute(answerCallbackQuery);
                         simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
-                                , BotStatus.WAITING_FOR_APPLY_MONTH);
+                                , BotStatus.WAITING_FOR_CHOOSE_MONTH);
                         simpleReminderBot.execute(DeleteMessage.builder()
                                 .messageId(callbackQuery.getMessage().getMessageId())
                                 .chatId(callbackQuery.getMessage().getChatId())
                                 .build()
                         );
                         reminderInlineKeyboards.refreshKeyboards();
+                        if (simpleReminderBot.getUserDataCache()
+                                .errorMessageIsPresent(callbackQuery.getMessage().getChatId())) {
+                            this.deleteMessage(simpleReminderBot.getUserDataCache()
+                                    .getUserErrorMessage(callbackQuery.getMessage().getChatId()), simpleReminderBot);
+                            simpleReminderBot.getUserDataCache()
+                                    .deleteUserErrorMessage(callbackQuery.getMessage().getChatId());
+                        }
                         simpleReminderBot.execute(SendMessage.builder().chatId(callbackQuery.getMessage().getChatId())
                                 .text("Выберите месяц и нажмите \"Далее\"")
                                 .replyMarkup(reminderInlineKeyboards.getKeyboard("months"))
@@ -82,12 +102,36 @@ public class CallbackHandlerImpl implements CallbackHandler {
                         simpleReminderBot.execute(answerCallbackQuery);
                     }
                     break;
-                case "invalidTextCommands":
+                case "january", "february", "march", "april", "may", "june", "july"
+                , "august", "september", "october", "november", "december":
+                    simpleReminderBot.getUserDataCache().setUserChoiceOfMonth(callbackQuery.getMessage().getChatId()
+                            , Month.valueOf(callbackData.toUpperCase()).getValue());
+                    simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
+                            , BotStatus.WAITING_FOR_APPLY_MONTH);
                     answerCallbackQuery = AnswerCallbackQuery.builder()
                             .callbackQueryId(callbackQuery.getId())
-                            .text("Отправка команд в режиме создания напоминания запрещена!" +
-                                    " Нажмете \"Отмена\" для выхода из данного режима.").showAlert(true).build();
+                            .build();
                     simpleReminderBot.execute(answerCallbackQuery);
+                    if (simpleReminderBot.getUserDataCache()
+                            .errorMessageIsPresent(callbackQuery.getMessage().getChatId())) {
+                        this.deleteMessage(simpleReminderBot.getUserDataCache()
+                                .getUserErrorMessage(callbackQuery.getMessage().getChatId()), simpleReminderBot);
+                        simpleReminderBot.getUserDataCache()
+                                .deleteUserErrorMessage(callbackQuery.getMessage().getChatId());
+                    }
+                    simpleReminderBot.execute(DeleteMessage.builder()
+                            .messageId(callbackQuery.getMessage().getMessageId())
+                            .chatId(callbackQuery.getMessage().getChatId())
+                            .build()
+                    );
+                    simpleReminderBot.execute(SendMessage.builder().chatId(callbackQuery.getMessage().getChatId())
+                            .text("Выбран месяц: " + Month.of(simpleReminderBot.getUserDataCache()
+                                    .getUserChoiceOfMonth(callbackQuery.getMessage().getChatId()))
+                                    .getDisplayName(TextStyle.FULL_STANDALONE, new Locale("ru"))
+                                    + "\nДля продолжения нажмите \"Далее\", либо выберите другой месяц."
+                            )
+                            .replyMarkup(reminderInlineKeyboards.getKeyboard("months"))
+                            .build());
                     break;
                 case "textIsEmpty":
                     answerCallbackQuery = AnswerCallbackQuery.builder()
@@ -97,5 +141,14 @@ public class CallbackHandlerImpl implements CallbackHandler {
                     break;
             }
         }
+    }
+
+    private void deleteMessage(Message message, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException {
+        simpleReminderBot.execute(DeleteMessage.builder()
+                .chatId(message.getChatId())
+                .messageId(message.getMessageId())
+                .build()
+        );
     }
 }

@@ -1,6 +1,7 @@
 package com.amikhaylov.mysimplereminder.keyboards;
 
 import lombok.Getter;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -9,9 +10,12 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Log4j
 @Component
 @Getter
 public class ReminderInlineKeyboards {
@@ -31,138 +35,6 @@ public class ReminderInlineKeyboards {
                         .collect(Collectors.toList())
                 ).build()
         );
-        addKeyboard("30_days", InlineKeyboardMarkup.builder()
-                .keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("1") ||
-                                        button.getCallbackData().equals("2") ||
-                                        button.getCallbackData().equals("3") ||
-                                        button.getCallbackData().equals("4") ||
-                                        button.getCallbackData().equals("5") ||
-                                        button.getCallbackData().equals("6") ||
-                                        button.getCallbackData().equals("7")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("8") ||
-                                        button.getCallbackData().equals("9") ||
-                                        button.getCallbackData().equals("10") ||
-                                        button.getCallbackData().equals("11") ||
-                                        button.getCallbackData().equals("12") ||
-                                        button.getCallbackData().equals("13") ||
-                                        button.getCallbackData().equals("14")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("15") ||
-                                        button.getCallbackData().equals("16") ||
-                                        button.getCallbackData().equals("17") ||
-                                        button.getCallbackData().equals("18") ||
-                                        button.getCallbackData().equals("19") ||
-                                        button.getCallbackData().equals("20") ||
-                                        button.getCallbackData().equals("21")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("22") ||
-                                        button.getCallbackData().equals("23") ||
-                                        button.getCallbackData().equals("24") ||
-                                        button.getCallbackData().equals("25") ||
-                                        button.getCallbackData().equals("26") ||
-                                        button.getCallbackData().equals("27") ||
-                                        button.getCallbackData().equals("28")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("29") ||
-                                        button.getCallbackData().equals("30")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("cancel") ||
-                                        button.getCallbackData().equals("done")
-                        )
-                        .collect(Collectors.toList())
-                ).build()
-        );
-        addKeyboard("31_days", InlineKeyboardMarkup.builder()
-                .keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("1") ||
-                                        button.getCallbackData().equals("2") ||
-                                        button.getCallbackData().equals("3") ||
-                                        button.getCallbackData().equals("4") ||
-                                        button.getCallbackData().equals("5") ||
-                                        button.getCallbackData().equals("6") ||
-                                        button.getCallbackData().equals("7")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("8") ||
-                                        button.getCallbackData().equals("9") ||
-                                        button.getCallbackData().equals("10") ||
-                                        button.getCallbackData().equals("11") ||
-                                        button.getCallbackData().equals("12") ||
-                                        button.getCallbackData().equals("13") ||
-                                        button.getCallbackData().equals("14")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("15") ||
-                                        button.getCallbackData().equals("16") ||
-                                        button.getCallbackData().equals("17") ||
-                                        button.getCallbackData().equals("18") ||
-                                        button.getCallbackData().equals("19") ||
-                                        button.getCallbackData().equals("20") ||
-                                        button.getCallbackData().equals("21")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("22") ||
-                                        button.getCallbackData().equals("23") ||
-                                        button.getCallbackData().equals("24") ||
-                                        button.getCallbackData().equals("25") ||
-                                        button.getCallbackData().equals("26") ||
-                                        button.getCallbackData().equals("27") ||
-                                        button.getCallbackData().equals("28")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("29") ||
-                                        button.getCallbackData().equals("30") ||
-                                        button.getCallbackData().equals("31")
-                        )
-                        .collect(Collectors.toList())
-                ).keyboardRow(this.reminderInlineButtons.getButtons()
-                        .stream()
-                        .filter(button ->
-                                button.getCallbackData().equals("cancel") ||
-                                        button.getCallbackData().equals("done")
-                        )
-                        .collect(Collectors.toList())
-                ).build()
-        );
-
         addKeyboard("months", InlineKeyboardMarkup.builder()
                 .keyboardRow(this.reminderInlineButtons.getButtons()
                         .stream()
@@ -201,28 +73,65 @@ public class ReminderInlineKeyboards {
     }
 
     public void refreshKeyboards() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM", Locale.ENGLISH);
-        Calendar calendar = Calendar.getInstance();
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        LocalDate date = LocalDate.now();
+        int currentMonth = date.getMonth().getValue();
+        InlineKeyboardMarkup inlineKeyboardMarkupMonths = new InlineKeyboardMarkup();
+        InlineKeyboardMarkup inlineKeyboardMarkupDays;
         List<InlineKeyboardButton> keyboardRow1 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardRow2 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardRow3 = new ArrayList<>();
-        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-
+        List<InlineKeyboardButton> keyboardRow4;
+        List<List<InlineKeyboardButton>> keyboardMonths = new ArrayList<>();
+        List<List<InlineKeyboardButton>> keyboardDays = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            calendar.add(Calendar.MONTH, 1);
-            keyboardRow1.add(this.reminderInlineButtons.getButton(dateFormat.format(calendar.getTime()).toLowerCase()));
-        }
-        for (int i = 0; i < 3; i++) {
-            calendar.add(Calendar.MONTH, 1);
-            keyboardRow2.add(this.reminderInlineButtons.getButton(dateFormat.format(calendar.getTime()).toLowerCase()));
+            keyboardRow1.add(this.reminderInlineButtons
+                    .getButton(Month.of(currentMonth + i).toString().toLowerCase()));
+            keyboardRow2.add(this.reminderInlineButtons
+                    .getButton(Month.of(currentMonth + i + 3).toString().toLowerCase()));
         }
         keyboardRow3.add(this.reminderInlineButtons.getButton("cancel"));
         keyboardRow3.add(this.reminderInlineButtons.getButton("to_choose_days"));
-        keyboard.add(keyboardRow1);
-        keyboard.add(keyboardRow2);
-        keyboard.add(keyboardRow3);
-        inlineKeyboardMarkup.setKeyboard(keyboard);
-        addKeyboard("months", inlineKeyboardMarkup);
+        keyboardMonths.add(keyboardRow1);
+        keyboardMonths.add(keyboardRow2);
+        keyboardMonths.add(keyboardRow3);
+        inlineKeyboardMarkupMonths.setKeyboard(keyboardMonths);
+        addKeyboard("months", inlineKeyboardMarkupMonths);
+        log.info("addKeyboard \"months\"");
+
+        for (int i = 0; i < 1; i++) {
+            inlineKeyboardMarkupDays = new InlineKeyboardMarkup();
+            int valueCurrentMonth = currentMonth + i;
+            int minDay;
+            int maxDay;
+            int maxRows;
+            if (i == 0) {
+                minDay = date.getDayOfMonth() + 1;
+                maxDay = date.lengthOfMonth();
+                maxRows = (int) Math
+                        .ceil((double) (maxDay - minDay) / 7);
+            } else {
+                minDay = 1;
+                maxDay = Month.of(valueCurrentMonth).maxLength();
+                maxRows = (int) Math
+                        .ceil((double) (maxDay) / 7);
+            }
+
+            for (int j = 0; j < maxRows; j++) {
+                keyboardRow4 = new ArrayList<>();
+                for (int k = minDay; k < minDay + 8; k++) {
+                    keyboardRow4.add(reminderInlineButtons.getButton(Integer.toString(k)));
+                    if (k == maxDay) {
+                        break;
+                    }
+                }
+                minDay += 8;
+                keyboardDays.add(keyboardRow4);
+            }
+            inlineKeyboardMarkupDays.setKeyboard(keyboardDays);
+            addKeyboard(Month.of(currentMonth).toString().toLowerCase(), inlineKeyboardMarkupDays);
+            log.info("addKeyboard " + Month.of(valueCurrentMonth).toString().toLowerCase());
+        }
+
+        log.info(keyboards);
     }
 }

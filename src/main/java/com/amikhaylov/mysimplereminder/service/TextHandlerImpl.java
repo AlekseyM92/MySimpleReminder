@@ -53,8 +53,8 @@ public class TextHandlerImpl implements TextHandler {
                     );
                     break;
                 case "/create_reminder":
-                    if (simpleReminderBot.getUserDataCache().errorMessageIsPresent(message.getChat())) {
-                        simpleReminderBot.getUserDataCache().deleteUserErrorMessage(message.getChat());
+                    if (simpleReminderBot.getUserDataCache().errorMessageIsPresent(message.getChatId())) {
+                        simpleReminderBot.getUserDataCache().deleteUserErrorMessage(message.getChatId());
                     }
                     sendMessage.setText("Для создания напоминания отправьте текстовое или голосовое сообщение и нажмите" +
                             " \"Далее\"");
@@ -148,8 +148,8 @@ public class TextHandlerImpl implements TextHandler {
 
     private void sendErrorMessage(Message message, String answer, SimpleReminderBot simpleReminderBot)
             throws TelegramApiException {
-        if (simpleReminderBot.getUserDataCache().errorMessageIsPresent(message.getChat())) {
-            deleteMessage(simpleReminderBot.getUserDataCache().getUserErrorMessage(message.getChat())
+        if (simpleReminderBot.getUserDataCache().errorMessageIsPresent(message.getChatId())) {
+            deleteMessage(simpleReminderBot.getUserDataCache().getUserErrorMessage(message.getChatId())
                     , simpleReminderBot);
             simpleReminderBot.getUserDataCache()
                     .setUserErrorMessage(sendAnswerMessage(message, answer, simpleReminderBot));

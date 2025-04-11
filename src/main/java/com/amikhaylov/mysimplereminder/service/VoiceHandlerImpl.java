@@ -61,8 +61,8 @@ public class VoiceHandlerImpl implements VoiceHandler {
 
     private void sendErrorMessage(Message message, String answer, SimpleReminderBot simpleReminderBot)
             throws TelegramApiException {
-        if (simpleReminderBot.getUserDataCache().errorMessageIsPresent(message.getChat())) {
-            deleteMessage(simpleReminderBot.getUserDataCache().getUserErrorMessage(message.getChat())
+        if (simpleReminderBot.getUserDataCache().errorMessageIsPresent(message.getChatId())) {
+            deleteMessage(simpleReminderBot.getUserDataCache().getUserErrorMessage(message.getChatId())
                     , simpleReminderBot);
             simpleReminderBot.getUserDataCache()
                     .setUserErrorMessage(sendAnswerMessage(message, answer, simpleReminderBot));

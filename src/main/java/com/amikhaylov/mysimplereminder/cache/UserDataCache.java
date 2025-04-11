@@ -11,8 +11,11 @@ import java.util.Map;
 @Component
 @NoArgsConstructor
 public class UserDataCache {
-    private static Map<Chat, Message> userErrorMessage = new HashMap<>();
-    private static Map<Long, BotStatus> userStateData = new HashMap<>();
+    private Map<Long, Message> userErrorMessage = new HashMap<>();
+    private Map<Long, BotStatus> userStateData = new HashMap<>();
+    private Map<Long, Integer> userChoiceOfMonth = new HashMap<>();
+    private Map<Long, Integer> userChoiceOfDay = new HashMap<>();
+
     public BotStatus getUserState(Long chatId) {
         if (userStateData.containsKey(chatId)) {
             return userStateData.get(chatId);
@@ -22,15 +25,12 @@ public class UserDataCache {
         }
     }
 
-    public Message getUserErrorMessage(Chat chat) {
-        if (userErrorMessage.containsKey(chat)) {
-            return userErrorMessage.get(chat);
-        }
-        return null;
+    public Message getUserErrorMessage(Long chatId) {
+        return userErrorMessage.get(chatId);
     }
 
-    public boolean errorMessageIsPresent(Chat chat) {
-        return userErrorMessage.containsKey(chat);
+    public boolean errorMessageIsPresent(Long chatId) {
+        return userErrorMessage.containsKey(chatId);
     }
 
     public void setUserState(Long chatId, BotStatus botStatus) {
@@ -38,10 +38,26 @@ public class UserDataCache {
     }
 
     public void setUserErrorMessage(Message message) {
-        userErrorMessage.put(message.getChat(), message);
+        userErrorMessage.put(message.getChatId(), message);
     }
 
-    public void deleteUserErrorMessage(Chat chat) {
-        userErrorMessage.remove(chat);
+    public void deleteUserErrorMessage(Long chatId) {
+        userErrorMessage.remove(chatId);
+    }
+
+    public void setUserChoiceOfMonth(Long chatId, Integer month) {
+        userChoiceOfMonth.put(chatId, month);
+    }
+
+    public Integer getUserChoiceOfMonth(Long chatId) {
+        return userChoiceOfMonth.get(chatId);
+    }
+
+    public void setUserChoiceOfDay(Long chatId, Integer day) {
+        userChoiceOfDay.put(chatId, day);
+    }
+
+    public Integer getUserChoiceOfDay(Long chatId) {
+        return userChoiceOfDay.get(chatId);
     }
 }
