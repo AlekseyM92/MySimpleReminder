@@ -36,5 +36,5 @@ public class Reminder {
     private String filePath;
 
     @Column(name = "delivered_flag")
-    private boolean isDelivered;
+    private boolean delivered;
 }
