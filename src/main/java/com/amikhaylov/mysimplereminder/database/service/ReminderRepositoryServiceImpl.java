@@ -1,7 +1,10 @@
 package com.amikhaylov.mysimplereminder.database.service;
 
+import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
 import com.amikhaylov.mysimplereminder.database.entity.Reminder;
 import com.amikhaylov.mysimplereminder.database.repository.ReminderRepository;
+import com.amikhaylov.mysimplereminder.service.TextSaver;
+import com.amikhaylov.mysimplereminder.service.VoiceSaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +14,17 @@ import java.util.List;
 @Service
 public class ReminderRepositoryServiceImpl implements ReminderRepositoryService {
     private final ReminderRepository reminderRepository;
+    private final TextSaver textSaver;
+    private final VoiceSaver voiceSaver;
 
     @Autowired
-    public ReminderRepositoryServiceImpl(ReminderRepository reminderRepository) {
+    public ReminderRepositoryServiceImpl(
+            ReminderRepository reminderRepository,
+            TextSaver textSaver,
+            VoiceSaver voiceSaver) {
         this.reminderRepository = reminderRepository;
+        this.textSaver = textSaver;
+        this.voiceSaver = voiceSaver;
     }
 
     @Override

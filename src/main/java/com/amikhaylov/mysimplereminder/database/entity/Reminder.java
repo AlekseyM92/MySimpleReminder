@@ -17,24 +17,33 @@ public class Reminder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reminder_id")
+    @Column(name = "reminder_id", nullable = false)
     private Long messageId;
 
-    @Column(name = "chat_id")
+    @Column(name = "chat_id", nullable = false)
     private Long chatId;
 
     @Column(name = "user_name")
     private String userName;
 
-    @Column(name = "send_date")
+    @Column(name = "send_date", nullable = false)
     private LocalDateTime sendDateTime;
 
-    @Column(name = "reminder_date")
+    @Column(name = "reminder_date", nullable = false)
     private LocalDate dateReminder;
 
-    @Column(name = "filePath")
+    @Column(name = "filePath", nullable = false)
     private String filePath;
 
     @Column(name = "delivered_flag")
     private boolean delivered;
+
+    public Reminder(Long chatId, String userName, LocalDateTime sendDateTime, LocalDate dateReminder, String filePath, boolean delivered) {
+        this.chatId = chatId;
+        this.userName = userName;
+        this.sendDateTime = sendDateTime;
+        this.dateReminder = dateReminder;
+        this.filePath = filePath;
+        this.delivered = delivered;
+    }
 }

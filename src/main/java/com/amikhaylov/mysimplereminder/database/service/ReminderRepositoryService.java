@@ -1,6 +1,9 @@
 package com.amikhaylov.mysimplereminder.database.service;
 
+import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
 import com.amikhaylov.mysimplereminder.database.entity.Reminder;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.time.LocalDate;
 import java.util.List;

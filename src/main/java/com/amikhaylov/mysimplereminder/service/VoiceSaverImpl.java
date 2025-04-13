@@ -18,23 +18,24 @@ public class VoiceSaverImpl implements VoiceSaver {
     }
 
     @Override
-    public void downloadAndSaveVoiceFile(Message message, SimpleReminderBot simpleReminderBot)
+    public String downloadAndSaveVoiceFile(Message message, SimpleReminderBot simpleReminderBot)
             throws TelegramApiException {
         var tempFilePath = simpleReminderBot.execute(new GetFile(message.getVoice().getFileId()));
-        simpleReminderBot.downloadFile(tempFilePath
-                , new File(filepath + Long.toString(message.getChatId())
-                        + "_" + message.getMessageId()
-                        + "_" + message.getChat().getFirstName()
-                        + "-" + message.getChat().getLastName()
-                        + ".ogg"
-                )
-        );
+        var resultFilePath = filepath + Long.toString(message.getChatId())
+                + "_" + message.getMessageId()
+                + "_" + message.getChat().getFirstName()
+                + "-" + message.getChat().getLastName()
+                + ".ogg";
+        simpleReminderBot.downloadFile(tempFilePath, new File(resultFilePath));
+        return resultFilePath;
     }
 
     @Override
-    public void downloadAndSaveVoiceFile(Message message, String fileName, SimpleReminderBot simpleReminderBot)
+    public String downloadAndSaveVoiceFile(Message message, String fileName, SimpleReminderBot simpleReminderBot)
             throws TelegramApiException {
         var tempFilePath = simpleReminderBot.execute(new GetFile(message.getVoice().getFileId()));
+        var resultFilePath = filepath + fileName;
         simpleReminderBot.downloadFile(tempFilePath, new File(filepath + fileName));
+        return resultFilePath;
     }
 }

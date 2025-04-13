@@ -2,6 +2,8 @@ package com.amikhaylov.mysimplereminder.service;
 
 import com.amikhaylov.mysimplereminder.cache.BotStatus;
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
+import com.amikhaylov.mysimplereminder.database.entity.Reminder;
+import com.amikhaylov.mysimplereminder.database.service.ReminderRepositoryService;
 import com.amikhaylov.mysimplereminder.keyboards.ReminderInlineKeyboards;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -15,7 +17,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
@@ -26,13 +30,18 @@ public class CallbackHandlerImpl implements CallbackHandler {
     private static int currentYear = LocalDate.now().getYear();
     private final TextSaver textSaver;
     private final VoiceSaver voiceSaver;
+    private final ReminderRepositoryService reminderRepositoryService;
 
     @Autowired
-    public CallbackHandlerImpl(ReminderInlineKeyboards reminderInlineKeyboards, TextSaver textSaver
-            , VoiceSaver voiceSaver) {
+    public CallbackHandlerImpl(
+            ReminderInlineKeyboards reminderInlineKeyboards,
+            TextSaver textSaver,
+            VoiceSaver voiceSaver,
+            ReminderRepositoryService reminderRepositoryService) {
         this.reminderInlineKeyboards = reminderInlineKeyboards;
         this.textSaver = textSaver;
         this.voiceSaver = voiceSaver;
+        this.reminderRepositoryService = reminderRepositoryService;
     }
 
     @Override
@@ -60,6 +69,8 @@ public class CallbackHandlerImpl implements CallbackHandler {
                             .deleteReminderVoiceMessage(callbackQuery.getMessage().getChatId());
                     simpleReminderBot.getUserDataCache()
                             .deleteReminderYear(callbackQuery.getMessage().getChatId());
+                    simpleReminderBot.getUserDataCache()
+                            .deleteUserName(callbackQuery.getMessage().getChatId());
                     answerCallbackQuery = AnswerCallbackQuery.builder()
                             .callbackQueryId(callbackQuery.getId()).build();
                     simpleReminderBot.execute(answerCallbackQuery);
@@ -166,7 +177,7 @@ public class CallbackHandlerImpl implements CallbackHandler {
                     break;
                 case "to_choose_days":
                     if (simpleReminderBot.getUserDataCache().getUserState(callbackQuery.getMessage().getChatId())
-                        == BotStatus.WAITING_FOR_APPLY_MONTH) {
+                            == BotStatus.WAITING_FOR_APPLY_MONTH) {
                         simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
                                 , BotStatus.WAITING_FOR_CHOOSE_DAY);
                         answerCallbackQuery = AnswerCallbackQuery.builder()
@@ -287,15 +298,43 @@ public class CallbackHandlerImpl implements CallbackHandler {
                         simpleReminderBot.execute(answerCallbackQuery);
                         if (simpleReminderBot.getUserDataCache()
                                 .getReminderTextMessage(callbackQuery.getMessage().getChatId()) != null) {
-                            textSaver.saveTextFile(simpleReminderBot.getUserDataCache()
+                            var resultFilePath = textSaver.saveTextFile(simpleReminderBot.getUserDataCache()
                                     .getReminderTextMessage(callbackQuery.getMessage().getChatId()));
+                            if (resultFilePath != null) {
+                                var chatId = callbackQuery.getMessage().getChatId();
+                                LocalDate reminderDate = LocalDate
+                                        .of(simpleReminderBot.getUserDataCache().getReminderYear(chatId)
+                                                , Month.valueOf(simpleReminderBot.getUserDataCache()
+                                                        .getUserChoiceOfMonth(chatId).toUpperCase())
+                                                , Integer.parseInt(simpleReminderBot.getUserDataCache()
+                                                        .getUserChoiceOfDay(chatId))
+                                        );
+                                reminderRepositoryService.saveReminder(new Reminder(chatId
+                                        , simpleReminderBot.getUserDataCache().getUserName(chatId)
+                                        , LocalDateTime.now(), reminderDate, resultFilePath, false));
+                            }
                         }
                         simpleReminderBot.getUserDataCache()
                                 .deleteReminderTextMessage(callbackQuery.getMessage().getChatId());
                         if (simpleReminderBot.getUserDataCache()
                                 .getReminderVoiceMessage(callbackQuery.getMessage().getChatId()) != null) {
-                            voiceSaver.downloadAndSaveVoiceFile(simpleReminderBot.getUserDataCache()
-                                    .getReminderVoiceMessage(callbackQuery.getMessage().getChatId()), simpleReminderBot);
+                            var resultFilePath = voiceSaver
+                                    .downloadAndSaveVoiceFile(simpleReminderBot.getUserDataCache()
+                                                    .getReminderVoiceMessage(callbackQuery.getMessage().getChatId())
+                                            , simpleReminderBot);
+                            if (resultFilePath != null) {
+                                var chatId = callbackQuery.getMessage().getChatId();
+                                LocalDate reminderDate = LocalDate
+                                        .of(simpleReminderBot.getUserDataCache().getReminderYear(chatId)
+                                                , Month.valueOf(simpleReminderBot.getUserDataCache()
+                                                        .getUserChoiceOfMonth(chatId).toUpperCase())
+                                                , Integer.parseInt(simpleReminderBot.getUserDataCache()
+                                                        .getUserChoiceOfDay(chatId))
+                                        );
+                                reminderRepositoryService.saveReminder(new Reminder(chatId
+                                        , simpleReminderBot.getUserDataCache().getUserName(chatId)
+                                        , LocalDateTime.now(), reminderDate, resultFilePath, false));
+                            }
                         }
                         simpleReminderBot.getUserDataCache()
                                 .deleteReminderVoiceMessage(callbackQuery.getMessage().getChatId());
@@ -336,6 +375,8 @@ public class CallbackHandlerImpl implements CallbackHandler {
                                 .deleteUserChoiceOfMonth(callbackQuery.getMessage().getChatId());
                         simpleReminderBot.getUserDataCache()
                                 .deleteReminderYear(callbackQuery.getMessage().getChatId());
+                        simpleReminderBot.getUserDataCache()
+                                .deleteUserName(callbackQuery.getMessage().getChatId());
                     } else {
                         answerCallbackQuery = AnswerCallbackQuery.builder()
                                 .callbackQueryId(callbackQuery.getId())

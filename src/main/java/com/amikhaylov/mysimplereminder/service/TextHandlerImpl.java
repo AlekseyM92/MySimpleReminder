@@ -143,7 +143,8 @@ public class TextHandlerImpl implements TextHandler {
                             .deleteUserErrorMessage(message.getChatId());
                 }
                 simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER);
-                simpleReminderBot.getUserDataCache().setReminderTextMessage(message.getChatId(), message);
+                simpleReminderBot.getUserDataCache().setUserName(chatId, message.getChat().getUserName());
+                simpleReminderBot.getUserDataCache().setReminderTextMessage(chatId, message);
             }
         } else if (simpleReminderBot.getUserDataCache().getUserState(chatId)
                 == BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER

@@ -42,6 +42,7 @@ public class VoiceHandlerImpl implements VoiceHandler {
             } else {
                 simpleReminderBot.getUserDataCache().setUserState(message.getChatId()
                         , BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER);
+                simpleReminderBot.getUserDataCache().setUserName(message.getChatId(), message.getChat().getUserName());
                 simpleReminderBot.getUserDataCache().setReminderVoiceMessage(message.getChatId(), message);
             }
 

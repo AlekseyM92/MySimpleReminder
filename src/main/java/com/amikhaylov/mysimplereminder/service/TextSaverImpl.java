@@ -20,28 +20,34 @@ public class TextSaverImpl implements TextSaver {
     }
 
     @Override
-    public void saveTextFile(Message message) {
-        File file = new File(this.filepath + Long.toString(message.getChatId())
+    public String saveTextFile(Message message) {
+        String resultPath = this.filepath + Long.toString(message.getChatId())
                 + "_" + message.getMessageId()
                 + "_" + message.getChat().getFirstName()
                 + "-" + message.getChat().getLastName()
-                + ".txt");
+                + ".txt";
+        File file = new File(resultPath);
         try (FileWriter fileWriter = new FileWriter(file, true)) {
             fileWriter.write(message.getText());
             fileWriter.flush();
+            return resultPath;
         } catch (IOException ex) {
             log.error(ex.getMessage(), ex);
         }
+        return null;
     }
 
     @Override
-    public void saveTextFile(Message message, String fileName) {
-        File file = new File(this.filepath + fileName);
+    public String saveTextFile(Message message, String fileName) {
+        String resultPath = this.filepath + fileName;
+        File file = new File(resultPath);
         try (FileWriter fileWriter = new FileWriter(file, true)) {
             fileWriter.write(message.getText());
             fileWriter.flush();
+            return resultPath;
         } catch (IOException ex) {
             log.error(ex.getMessage(), ex);
         }
+        return null;
     }
 }

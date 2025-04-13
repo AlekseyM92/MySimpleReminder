@@ -18,6 +18,7 @@ public class UserDataCache {
     private Map<Long, Message> reminderVoiceMessage = new HashMap<>();
     private Map<Long, Message> reminderTextMessage = new HashMap<>();
     private Map<Long, Integer> reminderYear = new HashMap<>();
+    private Map<Long, String> userName = new HashMap<>();
 
     public BotStatus getUserState(Long chatId) {
         if (userStateData.containsKey(chatId)) {
@@ -106,5 +107,17 @@ public class UserDataCache {
 
     public void deleteReminderYear(Long chatId) {
         reminderYear.remove(chatId);
+    }
+
+    public void setUserName(Long chatId, String userName) {
+        this.userName.put(chatId, userName);
+    }
+
+    public String getUserName(Long chatId) {
+        return userName.get(chatId);
+    }
+
+    public void deleteUserName(Long chatId) {
+        userName.remove(chatId);
     }
 }
