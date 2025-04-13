@@ -22,13 +22,6 @@ import java.util.List;
 @Component
 public class VoiceHandlerImpl implements VoiceHandler {
 
-    private final String filepath;
-
-    @Autowired
-    public VoiceHandlerImpl(@Value("${srb.filepath}") String filepath) {
-        this.filepath = filepath;
-    }
-
     @Override
     public void handleVoice(Message message, SimpleReminderBot simpleReminderBot) throws TelegramApiException {
         if (message == null) {
@@ -49,10 +42,19 @@ public class VoiceHandlerImpl implements VoiceHandler {
             } else {
                 simpleReminderBot.getUserDataCache().setUserState(message.getChatId()
                         , BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER);
+                simpleReminderBot.getUserDataCache().setReminderVoiceMessage(message.getChatId(), message);
             }
 
         } else if (simpleReminderBot.getUserDataCache()
-                .getUserState(message.getChatId()) == BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER) {
+                .getUserState(message.getChatId()) == BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER
+                || simpleReminderBot.getUserDataCache()
+                .getUserState(message.getChatId()) == BotStatus.WAITING_FOR_CHOOSE_DAY
+                || simpleReminderBot.getUserDataCache()
+                .getUserState(message.getChatId()) == BotStatus.WAITING_FOR_CHOOSE_MONTH
+                || simpleReminderBot.getUserDataCache()
+                .getUserState(message.getChatId()) == BotStatus.WAITING_FOR_APPLY_DAY
+                || simpleReminderBot.getUserDataCache()
+                .getUserState(message.getChatId()) == BotStatus.WAITING_FOR_APPLY_MONTH) {
             deleteMessage(message, simpleReminderBot);
             sendErrorMessage(message, "Вы уже отправили сообщение!\nНажмите \"Далее\"" +
                     " для продолжения или \"Отмена\" для выхода из режима создания напоминания.", simpleReminderBot);
@@ -79,12 +81,6 @@ public class VoiceHandlerImpl implements VoiceHandler {
                 .voice(new InputFile(new File(path)))
                 .build()
         );
-    }
-
-    public void downloadAndSaveFile(Message message, String path, SimpleReminderBot simpleReminderBot)
-            throws TelegramApiException {
-        var filePath = simpleReminderBot.execute(new GetFile(message.getVoice().getFileId()));
-        simpleReminderBot.downloadFile(filePath, new File(path));
     }
 
     private Message sendAnswerMessage(Message message, String answer, SimpleReminderBot simpleReminderBot)

@@ -75,6 +75,8 @@ public class ReminderInlineKeyboards {
     public void refreshKeyboards() {
         LocalDate date = LocalDate.now();
         int currentMonth = date.getMonth().getValue();
+        int currentMonthRowOne;
+        int currentMonthRowTwo;
         InlineKeyboardMarkup inlineKeyboardMarkupMonths = new InlineKeyboardMarkup();
         InlineKeyboardMarkup inlineKeyboardMarkupDays;
         List<InlineKeyboardButton> keyboardRow1 = new ArrayList<>();
@@ -82,12 +84,22 @@ public class ReminderInlineKeyboards {
         List<InlineKeyboardButton> keyboardRow3 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardRow4;
         List<List<InlineKeyboardButton>> keyboardMonths = new ArrayList<>();
-        List<List<InlineKeyboardButton>> keyboardDays = new ArrayList<>();
+        List<List<InlineKeyboardButton>> keyboardDays;
         for (int i = 0; i < 3; i++) {
+            if (currentMonth + i > 12) {
+                currentMonthRowOne = i;
+            } else {
+                currentMonthRowOne = currentMonth + i;
+            }
+            if (currentMonth + i + 3 > 12) {
+                currentMonthRowTwo = i + 3;
+            } else {
+                currentMonthRowTwo = currentMonth + i + 3;
+            }
             keyboardRow1.add(this.reminderInlineButtons
-                    .getButton(Month.of(currentMonth + i).toString().toLowerCase()));
+                    .getButton(Month.of(currentMonthRowOne).toString().toLowerCase()));
             keyboardRow2.add(this.reminderInlineButtons
-                    .getButton(Month.of(currentMonth + i + 3).toString().toLowerCase()));
+                    .getButton(Month.of(currentMonthRowTwo).toString().toLowerCase()));
         }
         keyboardRow3.add(this.reminderInlineButtons.getButton("cancel"));
         keyboardRow3.add(this.reminderInlineButtons.getButton("to_choose_days"));
@@ -98,9 +110,15 @@ public class ReminderInlineKeyboards {
         addKeyboard("months", inlineKeyboardMarkupMonths);
         log.info("addKeyboard \"months\"");
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 6; i++) {
             inlineKeyboardMarkupDays = new InlineKeyboardMarkup();
-            int valueCurrentMonth = currentMonth + i;
+            keyboardDays = new ArrayList<>();
+            int valueCurrentMonth;
+            if (currentMonth + i > 12) {
+                valueCurrentMonth = i;
+            } else {
+                valueCurrentMonth = currentMonth + i;
+            }
             int minDay;
             int maxDay;
             int maxRows;
@@ -118,17 +136,22 @@ public class ReminderInlineKeyboards {
 
             for (int j = 0; j < maxRows; j++) {
                 keyboardRow4 = new ArrayList<>();
-                for (int k = minDay; k < minDay + 8; k++) {
+                for (int k = minDay; k < minDay + 7; k++) {
                     keyboardRow4.add(reminderInlineButtons.getButton(Integer.toString(k)));
                     if (k == maxDay) {
                         break;
                     }
                 }
-                minDay += 8;
+                minDay += 7;
                 keyboardDays.add(keyboardRow4);
             }
+            keyboardRow4 = new ArrayList<>();
+            keyboardRow4.add(this.reminderInlineButtons.getButton("cancel"));
+            keyboardRow4.add(this.reminderInlineButtons.getButton("prev_step"));
+            keyboardRow4.add(this.reminderInlineButtons.getButton("finish"));
+            keyboardDays.add(keyboardRow4);
             inlineKeyboardMarkupDays.setKeyboard(keyboardDays);
-            addKeyboard(Month.of(currentMonth).toString().toLowerCase(), inlineKeyboardMarkupDays);
+            addKeyboard(Month.of(valueCurrentMonth).toString().toLowerCase(), inlineKeyboardMarkupDays);
             log.info("addKeyboard " + Month.of(valueCurrentMonth).toString().toLowerCase());
         }
 

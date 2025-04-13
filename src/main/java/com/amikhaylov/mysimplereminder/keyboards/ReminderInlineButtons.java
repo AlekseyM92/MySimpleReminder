@@ -61,7 +61,11 @@ public class ReminderInlineButtons {
         addButton("30", InlineKeyboardButton.builder().text("30").callbackData("30").build());
         addButton("31", InlineKeyboardButton.builder().text("31").callbackData("31").build());
         addButton("done", InlineKeyboardButton.builder().text("Готово").callbackData("done").build());
-        addButton("to_choose_days", InlineKeyboardButton.builder().text("Далее").callbackData("to_choose_days").build());
+        addButton("to_choose_days", InlineKeyboardButton.builder().text("Далее")
+                .callbackData("to_choose_days").build());
+        addButton("finish", InlineKeyboardButton.builder().text("Готово").callbackData("finish").build());
+        addButton("prev_step", InlineKeyboardButton.builder().text("Назад")
+                .callbackData("prev_step").build());
     }
 
     public void addButton(String callbackData, InlineKeyboardButton button) {

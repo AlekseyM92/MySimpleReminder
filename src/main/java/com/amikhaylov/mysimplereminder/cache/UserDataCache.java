@@ -13,8 +13,11 @@ import java.util.Map;
 public class UserDataCache {
     private Map<Long, Message> userErrorMessage = new HashMap<>();
     private Map<Long, BotStatus> userStateData = new HashMap<>();
-    private Map<Long, Integer> userChoiceOfMonth = new HashMap<>();
-    private Map<Long, Integer> userChoiceOfDay = new HashMap<>();
+    private Map<Long, String> userChoiceOfMonth = new HashMap<>();
+    private Map<Long, String> userChoiceOfDay = new HashMap<>();
+    private Map<Long, Message> reminderVoiceMessage = new HashMap<>();
+    private Map<Long, Message> reminderTextMessage = new HashMap<>();
+    private Map<Long, Integer> reminderYear = new HashMap<>();
 
     public BotStatus getUserState(Long chatId) {
         if (userStateData.containsKey(chatId)) {
@@ -45,19 +48,63 @@ public class UserDataCache {
         userErrorMessage.remove(chatId);
     }
 
-    public void setUserChoiceOfMonth(Long chatId, Integer month) {
+    public void setUserChoiceOfMonth(Long chatId, String month) {
         userChoiceOfMonth.put(chatId, month);
     }
 
-    public Integer getUserChoiceOfMonth(Long chatId) {
+    public String getUserChoiceOfMonth(Long chatId) {
         return userChoiceOfMonth.get(chatId);
     }
 
-    public void setUserChoiceOfDay(Long chatId, Integer day) {
+    public void setUserChoiceOfDay(Long chatId, String day) {
         userChoiceOfDay.put(chatId, day);
     }
 
-    public Integer getUserChoiceOfDay(Long chatId) {
+    public String getUserChoiceOfDay(Long chatId) {
         return userChoiceOfDay.get(chatId);
+    }
+
+    public void setReminderVoiceMessage(Long chatId, Message message) {
+        reminderVoiceMessage.put(chatId, message);
+    }
+
+    public Message getReminderVoiceMessage(Long chatId) {
+        return reminderVoiceMessage.get(chatId);
+    }
+
+    public void setReminderTextMessage(Long chatId, Message message) {
+        reminderTextMessage.put(chatId, message);
+    }
+
+    public Message getReminderTextMessage(Long chatId) {
+        return reminderTextMessage.get(chatId);
+    }
+
+    public void deleteReminderVoiceMessage(Long chatId) {
+        reminderVoiceMessage.remove(chatId);
+    }
+
+    public void deleteReminderTextMessage(Long chatId) {
+        reminderTextMessage.remove(chatId);
+    }
+
+    public void deleteUserChoiceOfMonth(Long chatId) {
+        userChoiceOfMonth.remove(chatId);
+    }
+
+    public void deleteUserChoiceOfDay(Long chatId) {
+        userChoiceOfDay.remove(chatId);
+    }
+
+    public void setReminderYear(Long chatId, Integer year) {
+        reminderYear.put(chatId, year);
+    }
+
+    public Integer getReminderYear(Long chatId) {
+        return reminderYear.get(chatId);
+    }
+
+    public void deleteReminderYear(Long chatId) {
+        reminderYear.remove(chatId);
     }
 }

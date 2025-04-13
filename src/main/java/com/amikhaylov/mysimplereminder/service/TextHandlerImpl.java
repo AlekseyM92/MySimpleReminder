@@ -4,7 +4,9 @@ import com.amikhaylov.mysimplereminder.cache.BotStatus;
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
 import com.amikhaylov.mysimplereminder.keyboards.ReminderInlineKeyboards;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessages;
@@ -14,6 +16,9 @@ import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import lombok.extern.log4j.Log4j;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 @Log4j
@@ -64,11 +69,13 @@ public class TextHandlerImpl implements TextHandler {
                             .getKeyboard("/create_reminder_1"));
                     break;
                 case "/my_reminders":
-                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.MY_REMINDERS);
+                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
+                    //simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.MY_REMINDERS);
                     sendMessage.setText("Вы нажали /my_reminders");
                     break;
                 case "/delete_all_reminders":
-                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DELETE_ALL_REMINDERS);
+                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
+                    //simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DELETE_ALL_REMINDERS);
                     sendMessage.setText("Вы нажали /delete_all_reminders");
                     break;
                 case "/help":
@@ -82,11 +89,13 @@ public class TextHandlerImpl implements TextHandler {
                             " напоминания будут удалены.");
                     break;
                 case "/language":
-                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.LANGUAGE);
+                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
+                    //simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.LANGUAGE);
                     sendMessage.setText("Вы нажали /language");
                     break;
                 case "/terminate_bot":
-                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.TERMINATE_BOT);
+                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
+                    //simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.TERMINATE_BOT);
                     sendMessage.setText("Вы нажали /terminate_bot");
                     break;
                 case "/description":
@@ -126,10 +135,22 @@ public class TextHandlerImpl implements TextHandler {
                 sendErrorMessage(message, "Отправка команд в режиме создания напоминания запрещена!" +
                         " Нажмите \"Отмена\" для выхода из данного режима.", simpleReminderBot);
             } else {
+                if (simpleReminderBot.getUserDataCache()
+                        .errorMessageIsPresent(message.getChatId())) {
+                    this.deleteMessage(simpleReminderBot.getUserDataCache()
+                            .getUserErrorMessage(message.getChatId()), simpleReminderBot);
+                    simpleReminderBot.getUserDataCache()
+                            .deleteUserErrorMessage(message.getChatId());
+                }
                 simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER);
+                simpleReminderBot.getUserDataCache().setReminderTextMessage(message.getChatId(), message);
             }
         } else if (simpleReminderBot.getUserDataCache().getUserState(chatId)
-                == BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER) {
+                == BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER
+                || simpleReminderBot.getUserDataCache().getUserState(chatId) == BotStatus.WAITING_FOR_CHOOSE_DAY
+                || simpleReminderBot.getUserDataCache().getUserState(chatId) == BotStatus.WAITING_FOR_CHOOSE_MONTH
+                || simpleReminderBot.getUserDataCache().getUserState(chatId) == BotStatus.WAITING_FOR_APPLY_DAY
+                || simpleReminderBot.getUserDataCache().getUserState(chatId) == BotStatus.WAITING_FOR_APPLY_MONTH) {
             if (simpleReminderBot.getMenuCommands()
                     .getListOfCommands().stream()
                     .map(BotCommand::getCommand).toList().contains(text.substring(1))) {
