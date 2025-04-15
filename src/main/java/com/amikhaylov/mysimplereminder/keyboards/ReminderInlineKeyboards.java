@@ -108,7 +108,6 @@ public class ReminderInlineKeyboards {
         keyboardMonths.add(keyboardRow3);
         inlineKeyboardMarkupMonths.setKeyboard(keyboardMonths);
         addKeyboard("months", inlineKeyboardMarkupMonths);
-        log.info("addKeyboard \"months\"");
 
         for (int i = 0; i < 6; i++) {
             inlineKeyboardMarkupDays = new InlineKeyboardMarkup();
@@ -152,9 +151,6 @@ public class ReminderInlineKeyboards {
             keyboardDays.add(keyboardRow4);
             inlineKeyboardMarkupDays.setKeyboard(keyboardDays);
             addKeyboard(Month.of(valueCurrentMonth).toString().toLowerCase(), inlineKeyboardMarkupDays);
-            log.info("addKeyboard " + Month.of(valueCurrentMonth).toString().toLowerCase());
         }
-
-        log.info(keyboards);
     }
 }

@@ -14,11 +14,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class MessageHandlerImpl implements MessageHandler {
     TextHandler textHandler;
     VoiceHandler voiceHandler;
+    private final ReminderAnswerMessage reminderAnswerMessage;
 
     @Autowired
-    private MessageHandlerImpl(TextHandler textHandler, VoiceHandler voiceHandler) {
+    private MessageHandlerImpl(TextHandler textHandler, VoiceHandler voiceHandler
+            , ReminderAnswerMessage reminderAnswerMessage) {
         this.textHandler = textHandler;
         this.voiceHandler = voiceHandler;
+        this.reminderAnswerMessage = reminderAnswerMessage;
     }
 
     @Override
@@ -29,9 +32,17 @@ public class MessageHandlerImpl implements MessageHandler {
             throw new TelegramApiException("Message is null");
         }
         if (message.hasText()) {
+            reminderAnswerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
             textHandler.handleText(message, simpleReminderBot);
         } else if (message.hasVoice()) {
+            reminderAnswerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
             voiceHandler.handleVoice(message, simpleReminderBot);
+        } else {
+            reminderAnswerMessage.deleteMessage(message, simpleReminderBot);
+            reminderAnswerMessage.sendErrorMessage(message
+                    , "Поддерживаются только текстовые или голосовые сообщения!"
+                    , simpleReminderBot
+            );
         }
     }
 }

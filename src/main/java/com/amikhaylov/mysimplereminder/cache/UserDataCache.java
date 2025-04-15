@@ -29,6 +29,16 @@ public class UserDataCache {
         }
     }
 
+    public void resetUserCache(Long chatId) {
+        setUserState(chatId, BotStatus.DEFAULT);
+        deleteUserName(chatId);
+        deleteUserChoiceOfMonth(chatId);
+        deleteUserChoiceOfDay(chatId);
+        deleteReminderVoiceMessage(chatId);
+        deleteReminderTextMessage(chatId);
+        deleteReminderYear(chatId);
+    }
+
     public Message getUserErrorMessage(Long chatId) {
         return userErrorMessage.get(chatId);
     }

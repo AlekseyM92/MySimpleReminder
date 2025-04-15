@@ -33,6 +33,11 @@ public class ReminderRepositoryServiceImpl implements ReminderRepositoryService 
     }
 
     @Override
+    public Reminder getReminder(Long reminderId) {
+        return reminderRepository.findById(reminderId).orElse(null);
+    }
+
+    @Override
     public List<Reminder> findAllUserReminders(Long chatId) {
         return reminderRepository.findAllByChatId(chatId);
     }
