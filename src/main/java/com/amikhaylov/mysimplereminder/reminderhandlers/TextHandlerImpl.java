@@ -1,9 +1,10 @@
-package com.amikhaylov.mysimplereminder.service;
+package com.amikhaylov.mysimplereminder.reminderhandlers;
 
 import com.amikhaylov.mysimplereminder.cache.BotStatus;
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
 import com.amikhaylov.mysimplereminder.database.service.RepositoryVoiceFile;
 import com.amikhaylov.mysimplereminder.keyboards.ReminderInlineKeyboards;
+import com.amikhaylov.mysimplereminder.service.AnswerMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
@@ -14,23 +15,21 @@ import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import lombok.extern.log4j.Log4j;
 
-import java.io.File;
-import java.io.FileReader;
 import java.util.List;
 
 @Log4j
 @Component
 public class TextHandlerImpl implements TextHandler {
     private final ReminderInlineKeyboards reminderInlineKeyboards;
-    private final ReminderAnswerMessage reminderAnswerMessage;
+    private final AnswerMessage answerMessage;
     private final RepositoryVoiceFile repositoryVoiceFile;
 
     @Autowired
     public TextHandlerImpl(ReminderInlineKeyboards reminderInlineKeyboards
-            , ReminderAnswerMessage reminderAnswerMessage
+            , AnswerMessage answerMessage
             , RepositoryVoiceFile repositoryVoiceFile) {
         this.reminderInlineKeyboards = reminderInlineKeyboards;
-        this.reminderAnswerMessage = reminderAnswerMessage;
+        this.answerMessage = answerMessage;
         this.repositoryVoiceFile = repositoryVoiceFile;
     }
 
@@ -52,7 +51,7 @@ public class TextHandlerImpl implements TextHandler {
             switch (text) {
                 case "/start":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
-                    reminderAnswerMessage.answerMessage(message, simpleReminderBot
+                    answerMessage.answerMessage(message, simpleReminderBot
                             , "Привет " + chat.getFirstName() + "! \n"
                                     + "Для создания напоминания выберете команду /create_reminder.\n"
                                     + "Для вызова подсказки по управлению ботом выберете команду /help\n"
@@ -61,8 +60,8 @@ public class TextHandlerImpl implements TextHandler {
                     break;
                 case "/create_reminder":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.CREATE_REMINDER);
-                    reminderAnswerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
-                    reminderAnswerMessage.answerMessage(message, simpleReminderBot
+                    answerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
+                    answerMessage.answerMessage(message, simpleReminderBot
                             , "Для создания напоминания отправьте текстовое или голосовое сообщение и нажмите" +
                                     " \"Далее\""
                             , reminderInlineKeyboards.getKeyboard("/create_reminder_1")
@@ -70,33 +69,33 @@ public class TextHandlerImpl implements TextHandler {
                     break;
                 case "/my_reminders":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
-                    reminderAnswerMessage.answerMessage(message, simpleReminderBot, "Вы нажали /my_reminders");
+                    answerMessage.answerMessage(message, simpleReminderBot, "Вы нажали /my_reminders");
 
                     List<InputFile> inputFiles = repositoryVoiceFile.getVoicesByChatId(chatId);
                     if (!inputFiles.isEmpty()) {
-                        reminderAnswerMessage.answerMessage(message, simpleReminderBot
+                        answerMessage.answerMessage(message, simpleReminderBot
                                 , "Ваш список голосовых напоминаний:\n");
                         for (InputFile inputFile : inputFiles) {
-                            log.info(inputFile.getAttachName());
+                            log.info(inputFile.getNewMediaFile().getAbsolutePath());
                             SendVoice sendVoice = SendVoice.builder()
-                                    .voice(new InputFile(new File(inputFile.getAttachName())))
+                                    .voice(inputFile)
                                     .chatId(message.getChatId())
                                     .build();
                             simpleReminderBot.execute(sendVoice);
                         }
                     } else {
-                        reminderAnswerMessage.answerMessage(message, simpleReminderBot
+                        answerMessage.answerMessage(message, simpleReminderBot
                                 , "У вас нет голосовых напоминаний!");
                     }
                     break;
                 case "/delete_all_reminders":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
-                    reminderAnswerMessage.answerMessage(message, simpleReminderBot
+                    answerMessage.answerMessage(message, simpleReminderBot
                             , "Вы нажали /delete_all_reminders");
                     break;
                 case "/help":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
-                    reminderAnswerMessage.answerMessage(message, simpleReminderBot
+                    answerMessage.answerMessage(message, simpleReminderBot
                             , "Для создания нового напоминания выберете команду /create_reminder" +
                                     " и следуйте дальнейшим иснтрукциям.\n" +
                                     "Для вывода всего списка напоминаний выберете команду /my_reminders.\n" +
@@ -107,15 +106,15 @@ public class TextHandlerImpl implements TextHandler {
                     break;
                 case "/language":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
-                    reminderAnswerMessage.answerMessage(message, simpleReminderBot, "Вы нажали /language");
+                    answerMessage.answerMessage(message, simpleReminderBot, "Вы нажали /language");
                     break;
                 case "/terminate_bot":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
-                    reminderAnswerMessage.answerMessage(message, simpleReminderBot, "Вы нажали /terminate_bot");
+                    answerMessage.answerMessage(message, simpleReminderBot, "Вы нажали /terminate_bot");
                     break;
                 case "/description":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
-                    reminderAnswerMessage.answerMessage(message, simpleReminderBot
+                    answerMessage.answerMessage(message, simpleReminderBot
                             , "Бот, предоставляет возможность создать текстовое или" +
                                     " голосовое напоминание на ближайшие 6 месяцев.\n" +
                                     "Ограничения:\n" +
@@ -134,27 +133,27 @@ public class TextHandlerImpl implements TextHandler {
                     break;
                 default:
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
-                    reminderAnswerMessage.answerMessage(message, simpleReminderBot, "Вы ввели "
+                    answerMessage.answerMessage(message, simpleReminderBot, "Вы ввели "
                             + message.getText());
                     break;
             }
         } else if (simpleReminderBot.getUserDataCache().getUserState(chatId) == BotStatus.CREATE_REMINDER) {
             if (text.isEmpty()) {
-                reminderAnswerMessage.sendErrorMessage(message, "Сообщение не может быть пустым!"
+                answerMessage.sendErrorMessage(message, "Сообщение не может быть пустым!"
                         , simpleReminderBot);
             } else if (text.length() > 1000) {
-                reminderAnswerMessage.deleteMessage(message, simpleReminderBot);
-                reminderAnswerMessage.sendErrorMessage(message
+                answerMessage.deleteMessage(message, simpleReminderBot);
+                answerMessage.sendErrorMessage(message
                         , "В сообщении не может быть больше 1000 символов!", simpleReminderBot);
             } else if (simpleReminderBot.getMenuCommands()
                     .getListOfCommands().stream()
                     .map(BotCommand::getCommand).toList().contains(text.substring(1))) {
-                reminderAnswerMessage.deleteMessage(message, simpleReminderBot);
-                reminderAnswerMessage.sendErrorMessage(message
+                answerMessage.deleteMessage(message, simpleReminderBot);
+                answerMessage.sendErrorMessage(message
                         , "Отправка команд в режиме создания напоминания запрещена!" +
                                 " Нажмите \"Отмена\" для выхода из данного режима.", simpleReminderBot);
             } else {
-                reminderAnswerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
+                answerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
                 simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER);
                 simpleReminderBot.getUserDataCache().setUserName(chatId, message.getChat().getFirstName());
                 simpleReminderBot.getUserDataCache().setReminderTextMessage(chatId, message);
@@ -168,14 +167,14 @@ public class TextHandlerImpl implements TextHandler {
             if (simpleReminderBot.getMenuCommands()
                     .getListOfCommands().stream()
                     .map(BotCommand::getCommand).toList().contains(text.substring(1))) {
-                reminderAnswerMessage.deleteMessage(message, simpleReminderBot);
-                reminderAnswerMessage.sendErrorMessage(message
+                answerMessage.deleteMessage(message, simpleReminderBot);
+                answerMessage.sendErrorMessage(message
                         , "Отправка команд в режиме создания напоминания запрещена!" +
                                 " Нажмите \"Отмена\" для выхода из данного режима. " +
                                 "или нажмите \"Далее\" для продолжения", simpleReminderBot);
             } else {
-                reminderAnswerMessage.deleteMessage(message, simpleReminderBot);
-                reminderAnswerMessage.sendErrorMessage(message
+                answerMessage.deleteMessage(message, simpleReminderBot);
+                answerMessage.sendErrorMessage(message
                         , "Вы уже отправили сообщение!\nНажмите \"Далее\" для продолжения" +
                                 " или \"Отмена\" для выхода из режима создания напоминания."
                         , simpleReminderBot);

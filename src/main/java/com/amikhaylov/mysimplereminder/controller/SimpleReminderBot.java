@@ -2,9 +2,9 @@ package com.amikhaylov.mysimplereminder.controller;
 
 import com.amikhaylov.mysimplereminder.cache.UserDataCache;
 import com.amikhaylov.mysimplereminder.config.BotConfig;
-import com.amikhaylov.mysimplereminder.service.CallbackHandler;
+import com.amikhaylov.mysimplereminder.reminderhandlers.CallbackHandler;
 import com.amikhaylov.mysimplereminder.service.MenuCommands;
-import com.amikhaylov.mysimplereminder.service.MessageHandler;
+import com.amikhaylov.mysimplereminder.reminderhandlers.MessageHandler;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;

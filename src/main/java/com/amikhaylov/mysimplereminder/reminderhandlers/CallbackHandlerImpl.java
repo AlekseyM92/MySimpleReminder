@@ -1,17 +1,18 @@
-package com.amikhaylov.mysimplereminder.service;
+package com.amikhaylov.mysimplereminder.reminderhandlers;
 
 import com.amikhaylov.mysimplereminder.cache.BotStatus;
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
 import com.amikhaylov.mysimplereminder.database.entity.Reminder;
 import com.amikhaylov.mysimplereminder.database.service.ReminderRepositoryService;
 import com.amikhaylov.mysimplereminder.keyboards.ReminderInlineKeyboards;
+import com.amikhaylov.mysimplereminder.service.AnswerCallback;
+import com.amikhaylov.mysimplereminder.service.AnswerMessage;
+import com.amikhaylov.mysimplereminder.service.TextSaver;
+import com.amikhaylov.mysimplereminder.service.VoiceSaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.time.LocalDate;
@@ -28,8 +29,8 @@ public class CallbackHandlerImpl implements CallbackHandler {
     private final TextSaver textSaver;
     private final VoiceSaver voiceSaver;
     private final ReminderRepositoryService reminderRepositoryService;
-    private final ReminderAnswerCallback reminderAnswerCallback;
-    private final ReminderAnswerMessage reminderAnswerMessage;
+    private final AnswerCallback answerCallback;
+    private final AnswerMessage answerMessage;
 
     @Autowired
     public CallbackHandlerImpl(
@@ -37,14 +38,14 @@ public class CallbackHandlerImpl implements CallbackHandler {
             TextSaver textSaver,
             VoiceSaver voiceSaver,
             ReminderRepositoryService reminderRepositoryService,
-            ReminderAnswerCallback reminderAnswerCallback,
-            ReminderAnswerMessage reminderAnswerMessage) {
+            AnswerCallback answerCallback,
+            AnswerMessage answerMessage) {
         this.reminderInlineKeyboards = reminderInlineKeyboards;
         this.textSaver = textSaver;
         this.voiceSaver = voiceSaver;
         this.reminderRepositoryService = reminderRepositoryService;
-        this.reminderAnswerCallback = reminderAnswerCallback;
-        this.reminderAnswerMessage = reminderAnswerMessage;
+        this.answerCallback = answerCallback;
+        this.answerMessage = answerMessage;
     }
 
     @Override
@@ -62,30 +63,30 @@ public class CallbackHandlerImpl implements CallbackHandler {
             switch (callbackData) {
                 case "cancel":
                     simpleReminderBot.getUserDataCache().resetUserCache(chatId);
-                    reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot);
-                    reminderAnswerMessage.answerMessage(callbackQuery, simpleReminderBot, "Отмена");
-                    reminderAnswerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
-                    reminderAnswerMessage.answerMessage(callbackQuery, simpleReminderBot
+                    answerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                    answerMessage.answerMessage(callbackQuery, simpleReminderBot, "Отмена");
+                    answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                    answerMessage.answerMessage(callbackQuery, simpleReminderBot
                             , "Для создания напоминания выберете команду /create_reminder.\n"
                                     + "Для вызова подсказки по управлению ботом выберете команду /help\n"
                                     + "Для вывода описания функционала бота выберете команду /description.");
-                    reminderAnswerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
                     break;
                 case "next_step":
                     if (simpleReminderBot.getUserDataCache().getUserState(callbackQuery.getMessage().getChatId())
                             == BotStatus.WAITING_FOR_APPLY_MESSAGE_REMINDER) {
-                        reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                        answerCallback.answerCallback(callbackQuery, simpleReminderBot);
                         simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
                                 , BotStatus.WAITING_FOR_CHOOSE_MONTH);
-                        reminderAnswerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                        answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
                         reminderInlineKeyboards.refreshKeyboards();
-                        reminderAnswerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
-                        reminderAnswerMessage.answerMessage(callbackQuery, simpleReminderBot
+                        answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                        answerMessage.answerMessage(callbackQuery, simpleReminderBot
                                 , "Выберите месяц и нажмите \"Далее\""
                                 , reminderInlineKeyboards.getKeyboard("months")
                         );
                     } else {
-                        reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot
+                        answerCallback.answerCallback(callbackQuery, simpleReminderBot
                                 , "Сначала отправьте сообщение,\n" +
                                         "затем нажмите \"Далее\"!"
                                 , true
@@ -104,10 +105,10 @@ public class CallbackHandlerImpl implements CallbackHandler {
                             .setReminderYear(callbackQuery.getMessage().getChatId(), currentYear);
                     simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
                             , BotStatus.WAITING_FOR_APPLY_MONTH);
-                    reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot);
-                    reminderAnswerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
-                    reminderAnswerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
-                    reminderAnswerMessage.answerMessage(callbackQuery, simpleReminderBot
+                    answerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                    answerMessage.answerMessage(callbackQuery, simpleReminderBot
                             , "Выбран год: " + currentYear +
                                     "\nВыбран месяц: " +
                                     Month.valueOf(simpleReminderBot
@@ -125,10 +126,10 @@ public class CallbackHandlerImpl implements CallbackHandler {
                             == BotStatus.WAITING_FOR_APPLY_MONTH) {
                         simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
                                 , BotStatus.WAITING_FOR_CHOOSE_DAY);
-                        reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot);
-                        reminderAnswerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
-                        reminderAnswerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
-                        reminderAnswerMessage.answerMessage(callbackQuery, simpleReminderBot
+                        answerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                        answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                        answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                        answerMessage.answerMessage(callbackQuery, simpleReminderBot
                                 , "Выбран год: " + simpleReminderBot.getUserDataCache()
                                         .getReminderYear(callbackQuery.getMessage().getChatId()) +
                                         "\nВыбран месяц: " +
@@ -145,7 +146,7 @@ public class CallbackHandlerImpl implements CallbackHandler {
                                 )
                         );
                     } else {
-                        reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot
+                        answerCallback.answerCallback(callbackQuery, simpleReminderBot
                                 , "Сначала выберите месяц,\n" +
                                         "затем нажмите \"Далее\"!"
                                 , true
@@ -159,10 +160,10 @@ public class CallbackHandlerImpl implements CallbackHandler {
                             , BotStatus.WAITING_FOR_APPLY_DAY);
                     simpleReminderBot.getUserDataCache()
                             .setUserChoiceOfDay(callbackQuery.getMessage().getChatId(), callbackData);
-                    reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot);
-                    reminderAnswerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
-                    reminderAnswerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
-                    reminderAnswerMessage.answerMessage(callbackQuery, simpleReminderBot
+                    answerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                    answerMessage.answerMessage(callbackQuery, simpleReminderBot
                             , "Выбран год: " + simpleReminderBot.getUserDataCache()
                                     .getReminderYear(callbackQuery.getMessage().getChatId()) +
                                     "\nВыбран месяц: " +
@@ -181,20 +182,20 @@ public class CallbackHandlerImpl implements CallbackHandler {
                     );
                     break;
                 case "prev_step":
-                    reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                    answerCallback.answerCallback(callbackQuery, simpleReminderBot);
                     simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
                             , BotStatus.WAITING_FOR_CHOOSE_MONTH);
-                    reminderAnswerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
-                    reminderAnswerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
                     reminderInlineKeyboards.refreshKeyboards();
-                    reminderAnswerMessage.answerMessage(callbackQuery, simpleReminderBot
+                    answerMessage.answerMessage(callbackQuery, simpleReminderBot
                             , "Выберите месяц и нажмите \"Далее\""
                             , reminderInlineKeyboards.getKeyboard("months"));
                     break;
                 case "finish":
                     if (simpleReminderBot.getUserDataCache().getUserState(callbackQuery.getMessage().getChatId())
                             == BotStatus.WAITING_FOR_APPLY_DAY) {
-                        reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                        answerCallback.answerCallback(callbackQuery, simpleReminderBot);
                         if (simpleReminderBot.getUserDataCache()
                                 .getReminderTextMessage(callbackQuery.getMessage().getChatId()) != null) {
                             var resultFilePath = textSaver.saveTextFile(simpleReminderBot.getUserDataCache()
@@ -237,9 +238,9 @@ public class CallbackHandlerImpl implements CallbackHandler {
                                 .deleteReminderVoiceMessage(callbackQuery.getMessage().getChatId());
                         simpleReminderBot.getUserDataCache()
                                 .setUserState(callbackQuery.getMessage().getChatId(), BotStatus.DEFAULT);
-                        reminderAnswerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
-                        reminderAnswerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
-                        reminderAnswerMessage.answerMessage(callbackQuery, simpleReminderBot
+                        answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                        answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                        answerMessage.answerMessage(callbackQuery, simpleReminderBot
                                 , "Напоминание успешно создано!" + "\nНапоминание сработает " +
                                         simpleReminderBot.getUserDataCache()
                                                 .getUserChoiceOfDay(callbackQuery.getMessage().getChatId()) +
@@ -257,7 +258,7 @@ public class CallbackHandlerImpl implements CallbackHandler {
                         );
                         simpleReminderBot.getUserDataCache().resetUserCache(chatId);
                     } else {
-                        reminderAnswerCallback.answerCallback(callbackQuery, simpleReminderBot
+                        answerCallback.answerCallback(callbackQuery, simpleReminderBot
                                 , "Сначала выберите день,\n" +
                                         "затем нажмите \"Готово\" для завершения создания напоминания!"
                                 , true

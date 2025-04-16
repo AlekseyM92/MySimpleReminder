@@ -3,7 +3,6 @@ package com.amikhaylov.mysimplereminder.database.service;
 import com.amikhaylov.mysimplereminder.database.entity.Reminder;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Voice;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -25,7 +24,7 @@ public class RepositoryVoiceFileImpl implements RepositoryVoiceFile {
                 .toList();
         List<InputFile> voices = new ArrayList<>();
         for (Reminder reminder : reminders) {
-            voices.add(new InputFile(reminder.getFilePath()));
+            voices.add(new InputFile(new File(reminder.getFilePath())));
         }
         return voices;
     }
@@ -34,7 +33,7 @@ public class RepositoryVoiceFileImpl implements RepositoryVoiceFile {
     public InputFile getVoice(Long reminderId) {
         Reminder reminder = reminderRepositoryService.getReminder(reminderId);
         if (reminder != null && reminder.getFilePath().endsWith(".ogg")) {
-            return new InputFile(reminder.getFilePath());
+            return new InputFile(new File(reminder.getFilePath()));
         }
         return null;
     }
@@ -46,7 +45,7 @@ public class RepositoryVoiceFileImpl implements RepositoryVoiceFile {
                 .toList();
         List<InputFile> voices = new ArrayList<>();
         for (Reminder reminder : reminders) {
-            voices.add(new InputFile(reminder.getFilePath()));
+            voices.add(new InputFile(new File(reminder.getFilePath())));
         }
         return voices;
     }

@@ -6,7 +6,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public interface ReminderAnswerMessage {
+public interface AnswerMessage {
     public void answerMessage(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot, String answer)
             throws TelegramApiException;
 
@@ -24,5 +24,6 @@ public interface ReminderAnswerMessage {
 
     public void deleteMessage(Message message, SimpleReminderBot simpleReminderBot) throws TelegramApiException;
 
-    public void sendErrorMessage(Message message, String answer, SimpleReminderBot simpleReminderBot) throws TelegramApiException;
+    public void sendErrorMessage(Message message, String answer, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException;
 }

@@ -1,6 +1,7 @@
-package com.amikhaylov.mysimplereminder.service;
+package com.amikhaylov.mysimplereminder.reminderhandlers;
 
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
+import com.amikhaylov.mysimplereminder.service.AnswerMessage;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class MessageHandlerImpl implements MessageHandler {
     TextHandler textHandler;
     VoiceHandler voiceHandler;
-    private final ReminderAnswerMessage reminderAnswerMessage;
+    private final AnswerMessage answerMessage;
 
     @Autowired
     private MessageHandlerImpl(TextHandler textHandler, VoiceHandler voiceHandler
-            , ReminderAnswerMessage reminderAnswerMessage) {
+            , AnswerMessage answerMessage) {
         this.textHandler = textHandler;
         this.voiceHandler = voiceHandler;
-        this.reminderAnswerMessage = reminderAnswerMessage;
+        this.answerMessage = answerMessage;
     }
 
     @Override
@@ -32,14 +33,14 @@ public class MessageHandlerImpl implements MessageHandler {
             throw new TelegramApiException("Message is null");
         }
         if (message.hasText()) {
-            reminderAnswerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
+            answerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
             textHandler.handleText(message, simpleReminderBot);
         } else if (message.hasVoice()) {
-            reminderAnswerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
+            answerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
             voiceHandler.handleVoice(message, simpleReminderBot);
         } else {
-            reminderAnswerMessage.deleteMessage(message, simpleReminderBot);
-            reminderAnswerMessage.sendErrorMessage(message
+            answerMessage.deleteMessage(message, simpleReminderBot);
+            answerMessage.sendErrorMessage(message
                     , "Поддерживаются только текстовые или голосовые сообщения!"
                     , simpleReminderBot
             );

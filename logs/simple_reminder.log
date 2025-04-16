@@ -1012,3 +1012,8 @@
 2025-04-15 23:53:36 INFO  TextHandlerImpl:80 - C:\\SimpleReminderSavedVoice\\1577747853_2201_Алексей-Михайлов.ogg
 2025-04-15 23:53:36 INFO  TextHandlerImpl:80 - C:\\SimpleReminderSavedVoice\\1577747853_2283_Алексей-Михайлов.ogg
 2025-04-15 23:53:36 INFO  TextHandlerImpl:80 - C:\\SimpleReminderSavedVoice\\1577747853_2349_Алексей-Михайлов.ogg
+2025-04-16 15:36:50 ERROR SimpleReminderBot:45 - Unable to execute setMyCommands method
+2025-04-16 15:37:11 ERROR BotInitializer:26 - Error removing old webhook
+2025-04-16 15:40:46 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-16 16:28:21 INFO  TextHandlerImpl:80 - C:\MyIdeaProjects\ReminderSavedVoice\1577747853_2454_Алексей-Михайлов.ogg
+2025-04-16 16:47:26 INFO  TextHandlerImpl:80 - C:\MyIdeaProjects\ReminderSavedVoice\1577747853_2454_Алексей-Михайлов.ogg

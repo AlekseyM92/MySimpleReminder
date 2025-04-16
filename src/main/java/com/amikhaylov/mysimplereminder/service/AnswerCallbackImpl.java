@@ -1,14 +1,14 @@
 package com.amikhaylov.mysimplereminder.service;
 
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-@Component
-public class ReminderAnswerCallbackImpl implements ReminderAnswerCallback {
+@Service
+public class AnswerCallbackImpl implements AnswerCallback {
     @Override
     public void answerCallback(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot)
             throws TelegramApiException {

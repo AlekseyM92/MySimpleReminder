@@ -1,7 +1,8 @@
-package com.amikhaylov.mysimplereminder.service;
+package com.amikhaylov.mysimplereminder.reminderhandlers;
 
 import com.amikhaylov.mysimplereminder.cache.BotStatus;
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
+import com.amikhaylov.mysimplereminder.service.AnswerMessage;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -10,10 +11,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Log4j
 @Component
 public class VoiceHandlerImpl implements VoiceHandler {
-    private final ReminderAnswerMessage reminderAnswerMessage;
+    private final AnswerMessage answerMessage;
 
-    public VoiceHandlerImpl(ReminderAnswerMessage reminderAnswerMessage) {
-        this.reminderAnswerMessage = reminderAnswerMessage;
+    public VoiceHandlerImpl(AnswerMessage answerMessage) {
+        this.answerMessage = answerMessage;
     }
 
     @Override
@@ -30,8 +31,8 @@ public class VoiceHandlerImpl implements VoiceHandler {
 
         if (simpleReminderBot.getUserDataCache().getUserState(message.getChatId()) == BotStatus.CREATE_REMINDER) {
             if (message.getVoice().getDuration() > 120) {
-                reminderAnswerMessage.deleteMessage(message, simpleReminderBot);
-                reminderAnswerMessage.sendErrorMessage(message
+                answerMessage.deleteMessage(message, simpleReminderBot);
+                answerMessage.sendErrorMessage(message
                         , "Длительность голосового сообщения не должна превышать 2 минуты!"
                         , simpleReminderBot);
             } else {
@@ -51,8 +52,8 @@ public class VoiceHandlerImpl implements VoiceHandler {
                 .getUserState(message.getChatId()) == BotStatus.WAITING_FOR_APPLY_DAY
                 || simpleReminderBot.getUserDataCache()
                 .getUserState(message.getChatId()) == BotStatus.WAITING_FOR_APPLY_MONTH) {
-            reminderAnswerMessage.deleteMessage(message, simpleReminderBot);
-            reminderAnswerMessage.sendErrorMessage(message, "Вы уже отправили сообщение!\nНажмите \"Далее\"" +
+            answerMessage.deleteMessage(message, simpleReminderBot);
+            answerMessage.sendErrorMessage(message, "Вы уже отправили сообщение!\nНажмите \"Далее\"" +
                     " для продолжения или \"Отмена\" для выхода из режима создания напоминания.", simpleReminderBot);
         }
     }

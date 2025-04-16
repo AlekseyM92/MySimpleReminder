@@ -1,7 +1,7 @@
 package com.amikhaylov.mysimplereminder.service;
 
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
@@ -9,8 +9,8 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-@Component
-public class ReminderAnswerMessageImpl implements ReminderAnswerMessage {
+@Service
+public class AnswerMessageImpl implements AnswerMessage {
     @Override
     public void answerMessage(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot, String answer)
             throws TelegramApiException {

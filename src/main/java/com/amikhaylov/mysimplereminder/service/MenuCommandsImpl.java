@@ -5,6 +5,7 @@ import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
@@ -13,7 +14,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 @Getter
 public class MenuCommandsImpl implements MenuCommands {
     private static final List<BotCommand> listOfCommands = new ArrayList<>();

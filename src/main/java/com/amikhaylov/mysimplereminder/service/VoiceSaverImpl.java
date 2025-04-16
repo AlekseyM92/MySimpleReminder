@@ -3,13 +3,14 @@ package com.amikhaylov.mysimplereminder.service;
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 
-@Component
+@Service
 public class VoiceSaverImpl implements VoiceSaver {
     private final String filepath;
 

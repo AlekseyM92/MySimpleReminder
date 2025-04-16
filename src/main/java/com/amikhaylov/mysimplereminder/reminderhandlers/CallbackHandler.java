@@ -1,4 +1,4 @@
-package com.amikhaylov.mysimplereminder.service;
+package com.amikhaylov.mysimplereminder.reminderhandlers;
 
 import com.amikhaylov.mysimplereminder.controller.SimpleReminderBot;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;

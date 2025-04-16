@@ -4,13 +4,14 @@ import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-@Component
+@Service
 @Log4j
 public class TextSaverImpl implements TextSaver {
     private final String filepath;
