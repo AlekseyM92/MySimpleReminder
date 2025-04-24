@@ -17,5 +17,6 @@ public interface ReminderRepositoryService {
     public void deleteReminder(Reminder reminder);
     public void deleteReminders(List<Reminder> reminders);
     public void deleteAllUserReminders(Long chatId);
-    public void deleteDeliveredReminders();
+    public int deleteDeliveredReminders();
+    public void updateReminderDelivered(Reminder reminder, boolean delivered);
 }

@@ -5,7 +5,8 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface RepositoryVoiceFile {
+public interface
+RepositoryVoiceFile {
     public List<InputFile> getVoicesByChatId(Long chatId);
 
     public InputFile getVoice(Long reminderId);

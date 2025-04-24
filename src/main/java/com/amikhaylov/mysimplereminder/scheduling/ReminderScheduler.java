@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,7 +28,7 @@ public class ReminderScheduler {
     private final RemindSender remindSender;
     private final SimpleReminderBot simpleReminderBot;
 
-    //@Scheduled(cron = "@daily")
+    //@Scheduled(cron = "@hourly")
     @Scheduled(cron = "0 * * * * *")
     public void remindAll() {
         List<Reminder> reminders =
@@ -37,10 +38,23 @@ public class ReminderScheduler {
             for (Reminder reminder : reminders) {
                 try {
                     remindSender.sendReminder(reminder, simpleReminderBot);
+                    reminderRepositoryService.updateReminderDelivered(reminder, true);
+                    File file = new File(reminder.getFilePath());
+                    if (file.exists()) {
+                        var isDeleted = file.delete();
+                        log.info("File " + reminder.getFilePath() + " is deleted: " + isDeleted);
+                    }
                 } catch (TelegramApiException e) {
                     log.error("Ошибка отправки напоминания!: " + e);
                 }
             }
         }
+    }
+
+    @Scheduled(initialDelay = 120000, fixedRate = 120000)
+    public void deleteReminders () {
+        int r;
+        r = reminderRepositoryService.deleteDeliveredReminders();
+        log.info("Deleted " + r + " reminders");
     }
 }

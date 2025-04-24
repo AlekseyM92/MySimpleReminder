@@ -15,5 +15,5 @@ public interface ReminderRepository extends JpaRepository<Reminder, Long> {
 
     List<Reminder> findAllByDateReminderAndDeliveredIs(LocalDate dateReminder, boolean delivered);
 
-    void deleteAllByDeliveredIs(boolean delivered);
+    int deleteByDelivered(boolean delivered);
 }

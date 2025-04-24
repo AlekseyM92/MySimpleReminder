@@ -7,6 +7,7 @@ import com.amikhaylov.mysimplereminder.service.TextSaver;
 import com.amikhaylov.mysimplereminder.service.VoiceSaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -68,7 +69,14 @@ public class ReminderRepositoryServiceImpl implements ReminderRepositoryService 
     }
 
     @Override
-    public void deleteDeliveredReminders() {
-        reminderRepository.deleteAllByDeliveredIs(true);
+    @Transactional
+    public int deleteDeliveredReminders() {
+        return reminderRepository.deleteByDelivered(true);
+    }
+
+    @Override
+    public void updateReminderDelivered(Reminder reminder, boolean delivered) {
+        reminder.setDelivered(delivered);
+        reminderRepository.save(reminder);
     }
 }
