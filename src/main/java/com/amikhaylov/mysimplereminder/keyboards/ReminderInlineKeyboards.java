@@ -99,7 +99,7 @@ public class ReminderInlineKeyboards {
     }
 
     public void refreshKeyboards() {
-        LocalDate date = LocalDate.now();
+        LocalDate date = LocalDate.now().plusDays(1);
         int currentMonth = date.getMonth().getValue();
         int currentMonthRowOne;
         int currentMonthRowTwo;
@@ -148,10 +148,14 @@ public class ReminderInlineKeyboards {
             int maxDay;
             int maxRows;
             if (i == 0) {
-                minDay = date.getDayOfMonth() + 1;
+                minDay = date.getDayOfMonth();
                 maxDay = date.lengthOfMonth();
-                maxRows = (int) Math
-                        .ceil((double) (maxDay - minDay) / 7);
+                if (minDay == maxDay) {
+                    maxRows = 1;
+                } else {
+                    maxRows = (int) Math
+                            .ceil((double) (maxDay - minDay) / 7);
+                }
             } else {
                 minDay = 1;
                 maxDay = Month.of(valueCurrentMonth).maxLength();
