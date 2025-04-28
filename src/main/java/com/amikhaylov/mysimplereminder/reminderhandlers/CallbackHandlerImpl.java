@@ -9,19 +9,32 @@ import com.amikhaylov.mysimplereminder.service.AnswerCallback;
 import com.amikhaylov.mysimplereminder.service.AnswerMessage;
 import com.amikhaylov.mysimplereminder.service.TextSaver;
 import com.amikhaylov.mysimplereminder.service.VoiceSaver;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.*;
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
 
+@Log4j
 @Component
+@RequiredArgsConstructor
 public class CallbackHandlerImpl implements CallbackHandler {
     private final ReminderInlineKeyboards reminderInlineKeyboards;
     private static int currentMonth = LocalDate.now().getMonthValue();
@@ -32,22 +45,6 @@ public class CallbackHandlerImpl implements CallbackHandler {
     private final AnswerCallback answerCallback;
     private final AnswerMessage answerMessage;
 
-    @Autowired
-    public CallbackHandlerImpl(
-            ReminderInlineKeyboards reminderInlineKeyboards,
-            TextSaver textSaver,
-            VoiceSaver voiceSaver,
-            ReminderRepositoryService reminderRepositoryService,
-            AnswerCallback answerCallback,
-            AnswerMessage answerMessage) {
-        this.reminderInlineKeyboards = reminderInlineKeyboards;
-        this.textSaver = textSaver;
-        this.voiceSaver = voiceSaver;
-        this.reminderRepositoryService = reminderRepositoryService;
-        this.answerCallback = answerCallback;
-        this.answerMessage = answerMessage;
-    }
-
     @Override
     public void handleCallback(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot)
             throws TelegramApiException {
@@ -56,20 +53,24 @@ public class CallbackHandlerImpl implements CallbackHandler {
         } else if (simpleReminderBot == null) {
             throw new TelegramApiException("SimpleReminderBot is null");
         }
+        List<Reminder> reminders = new ArrayList<>();
         var callbackData = callbackQuery.getData();
         var chatId = callbackQuery.getMessage().getChatId();
+        Message cancelMessage = new Message();
+        List<Map<Long, Message>> tempMessages = new ArrayList<>();
         if (callbackData != null) {
             AnswerCallbackQuery answerCallbackQuery;
             switch (callbackData) {
                 case "cancel":
+                    answerCallback.deleteRemindersMessages(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
                     simpleReminderBot.getUserDataCache().resetUserCache(chatId);
                     answerCallback.answerCallback(callbackQuery, simpleReminderBot);
                     answerMessage.answerMessage(callbackQuery, simpleReminderBot, "Отмена");
-                    answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
                     answerMessage.answerMessage(callbackQuery, simpleReminderBot
-                            , "Для создания напоминания выберете команду /create_reminder.\n"
-                                    + "Для вызова подсказки по управлению ботом выберете команду /help\n"
-                                    + "Для вывода описания функционала бота выберете команду /description.");
+                            , "Для создания напоминания выберите команду /create_reminder\n"
+                                    + "Для вызова подсказки по управлению ботом выберите команду /help\n"
+                                    + "Для вывода описания функционала бота выберите команду /description");
                     answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
                     break;
                 case "next_step":
@@ -263,6 +264,133 @@ public class CallbackHandlerImpl implements CallbackHandler {
                                         "затем нажмите \"Готово\" для завершения создания напоминания!"
                                 , true
                         );
+                    }
+                    break;
+                case "get_all_reminders":
+                    answerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                    simpleReminderBot.getUserDataCache().setUserState(callbackQuery.getMessage().getChatId()
+                            , BotStatus.REVIEW_REMINDERS);
+                    reminders = simpleReminderBot.getUserDataCache().getUserReminders(chatId);
+                    tempMessages = new ArrayList<>();
+                    var nr = 1;
+                    for (Reminder reminder : reminders) {
+                        Map<Long, Message> messages = new HashMap<>();
+                        if (reminder.getFilePath().endsWith(".txt")) {
+                            StringBuilder str1 = new StringBuilder();
+                            try (BufferedReader bufferedReader
+                                         = new BufferedReader(new FileReader(reminder.getFilePath()))) {
+                                while (bufferedReader.ready()) {
+                                    str1.append(bufferedReader.readLine());
+                                }
+                            } catch (IOException e) {
+                                log.error(e.getMessage());
+                            }
+                            messages.put(reminder.getMessageId(), answerMessage.answerMessage(callbackQuery
+                                    , simpleReminderBot
+                                    , "Напоминание № " + nr + ":\n"
+                                            + "Дата создания напоминания: "
+                                            + reminder.getSendDateTime()
+                                            .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")) + "\n"
+                                            + "Дата напоминания: " + reminder.getDateReminder()
+                                            .format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "\n"
+                                            + "Текст напоминания:\n" + "\"" + str1 + "\""
+                                    , reminderInlineKeyboards.getKeyboard("update_reminder")));
+                            tempMessages.add(messages);
+                            nr++;
+                        } else if (reminder.getFilePath().endsWith(".ogg")) {
+                            InputFile inputFile = new InputFile(new File(reminder.getFilePath()));
+                            SendVoice sendVoice = SendVoice.builder()
+                                    .voice(inputFile)
+                                    .chatId(reminder.getChatId())
+                                    .caption("Напоминание № " + nr + ":\n"
+                                            + "Дата создания напоминания: "
+                                            + reminder.getSendDateTime()
+                                            .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")) + "\n"
+                                            + "Дата напоминания: " + reminder.getDateReminder()
+                                            .format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "\n")
+                                    .replyMarkup(reminderInlineKeyboards.getKeyboard("update_reminder"))
+                                    .disableNotification(true)
+                                    .build();
+                            messages.put(reminder.getMessageId(), simpleReminderBot.execute(sendVoice));
+                            tempMessages.add(messages);
+                            nr++;
+                        }
+                    }
+                    Message message = answerMessage.answerMessage(callbackQuery, simpleReminderBot
+                            , "Всего запланированных напоминаний: " + reminders.size() + "\n"
+                                    + "Для выхода нажмите \"Отмена\""
+                            , reminderInlineKeyboards.getKeyboard("cancel"));
+                    tempMessages.add(Map.of(-1L, message));
+                    simpleReminderBot.getUserDataCache().setTempUserMessages(chatId, tempMessages);
+                    break;
+                case "delete_reminder":
+                    answerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                    List<Map<Long, Message>> copyOfTempUserMessages = List.copyOf(simpleReminderBot.getUserDataCache()
+                            .getTempUserMessages(callbackQuery.getMessage().getChatId()).stream()
+                            .filter(t -> t.containsValue(callbackQuery.getMessage()))
+                            .toList());
+                    List<Map<Long, Message>> tempUserMessages = simpleReminderBot.getUserDataCache()
+                            .getTempUserMessages(callbackQuery.getMessage().getChatId());
+                    reminders = simpleReminderBot.getUserDataCache().getUserReminders(chatId);
+                    if (!copyOfTempUserMessages.isEmpty() && !reminders.isEmpty()) {
+                        for (Map<Long, Message> messages : copyOfTempUserMessages) {
+                            for (Long reminder_id : messages.keySet()) {
+                                for (Reminder reminder : reminders.stream()
+                                        .filter(r -> Objects.equals(r.getMessageId(), reminder_id)).toList()) {
+                                    File file = new File(reminder.getFilePath());
+                                    if (file.exists()) {
+                                        var isDeleted = file.delete();
+                                        log.info("File " + reminder.getFilePath() + " is deleted: " + isDeleted);
+                                    }
+                                    reminderRepositoryService.deleteReminder(reminder);
+                                    List<Reminder> copyOfReminders = new ArrayList<>(reminders);
+                                    copyOfReminders.remove(reminder);
+                                    cancelMessage = simpleReminderBot.getUserDataCache()
+                                            .getTempUserMessages(callbackQuery.getMessage().getChatId()).stream()
+                                            .filter(t -> t.containsKey(-1L))
+                                            .toList().get(0).get(-1L);
+                                    CallbackQuery callbackQuery1 = new CallbackQuery();
+                                    callbackQuery1.setMessage(cancelMessage);
+                                    answerCallback.deleteCallbackMessage(callbackQuery1, simpleReminderBot);
+                                    Message message2 = answerMessage.answerMessage(callbackQuery, simpleReminderBot
+                                            , "Всего запланированных напоминаний: "
+                                                    + copyOfReminders.size() + "\n"
+                                                    + "Для выхода нажмите \"Отмена\""
+                                            , reminderInlineKeyboards.getKeyboard("cancel"));
+                                    simpleReminderBot.getUserDataCache().setUserReminders(chatId, copyOfReminders);
+                                    tempMessages = new ArrayList<>();
+                                    tempMessages.add(Map.of(-1L, message2));
+                                    tempMessages.addAll(tempUserMessages);
+                                    simpleReminderBot.getUserDataCache().setTempUserMessages(chatId
+                                            , tempMessages.stream()
+                                                    .filter(m -> !m.containsKey(reminder_id))
+                                                    .toList()
+                                    );
+                                    tempUserMessages = simpleReminderBot.getUserDataCache()
+                                            .getTempUserMessages(callbackQuery.getMessage().getChatId()).stream()
+                                            .filter(t -> !t.containsKey(-1L))
+                                            .toList();
+                                    if (tempUserMessages.isEmpty() || tempUserMessages.get(0).isEmpty()) {
+                                        cancelMessage = simpleReminderBot.getUserDataCache()
+                                                .getTempUserMessages(callbackQuery.getMessage().getChatId()).stream()
+                                                .filter(t -> t.containsKey(-1L))
+                                                .toList().get(0).get(-1L);
+                                        log.info("All reminders is deleted");
+                                        answerCallback.deleteRemindersMessages(callbackQuery, simpleReminderBot);
+                                        answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                                        simpleReminderBot.getUserDataCache().resetUserCache(chatId);
+                                        callbackQuery.setMessage(cancelMessage);
+                                        answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                                        answerMessage.answerMessage(callbackQuery, simpleReminderBot
+                                                , "Все напоминаня удалены!");
+                                    }
+                                }
+                            }
+                        }
                     }
                     break;
             }

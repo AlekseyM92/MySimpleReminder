@@ -35,6 +35,32 @@ public class ReminderInlineKeyboards {
                         .collect(Collectors.toList())
                 ).build()
         );
+        addKeyboard("cancel", InlineKeyboardMarkup.builder()
+                .keyboardRow(this.reminderInlineButtons.getButtons()
+                        .stream()
+                        .filter(button ->
+                                button.getCallbackData().equals("cancel"))
+                        .collect(Collectors.toList())
+                ).build()
+        );
+        addKeyboard("update_reminder", InlineKeyboardMarkup.builder()
+                .keyboardRow(this.reminderInlineButtons.getButtons()
+                        .stream()
+                        .filter(button ->
+                                button.getCallbackData().equals("edit_reminder")
+                                        || button.getCallbackData().equals("delete_reminder"))
+                        .collect(Collectors.toList())
+                ).build()
+        );
+        addKeyboard("all_reminders", InlineKeyboardMarkup.builder()
+                .keyboardRow(this.reminderInlineButtons.getButtons()
+                        .stream()
+                        .filter(button ->
+                                button.getCallbackData().equals("cancel")
+                                        || button.getCallbackData().equals("get_all_reminders"))
+                        .collect(Collectors.toList())
+                ).build()
+        );
         addKeyboard("months", InlineKeyboardMarkup.builder()
                 .keyboardRow(this.reminderInlineButtons.getButtons()
                         .stream()

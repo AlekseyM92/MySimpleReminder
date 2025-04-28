@@ -66,6 +66,12 @@ public class ReminderInlineButtons {
         addButton("finish", InlineKeyboardButton.builder().text("Готово").callbackData("finish").build());
         addButton("prev_step", InlineKeyboardButton.builder().text("Назад")
                 .callbackData("prev_step").build());
+        addButton("get_all_reminders", InlineKeyboardButton.builder().text("Далее")
+                .callbackData("get_all_reminders").build());
+        addButton("edit_reminder", InlineKeyboardButton.builder().text("Изменить")
+                .callbackData("edit_reminder").build());
+        addButton("delete_reminder", InlineKeyboardButton.builder().text("Удалить")
+                .callbackData("delete_reminder").build());
     }
 
     public void addButton(String callbackData, InlineKeyboardButton button) {

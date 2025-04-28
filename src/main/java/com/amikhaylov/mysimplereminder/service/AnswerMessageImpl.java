@@ -14,32 +14,38 @@ public class AnswerMessageImpl implements AnswerMessage {
     @Override
     public void answerMessage(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot, String answer)
             throws TelegramApiException {
-        simpleReminderBot.execute(SendMessage.builder()
-                .chatId(callbackQuery.getMessage().getChatId())
-                .text(answer)
-                .build()
+        simpleReminderBot.getUserDataCache().setLastBotMessage(
+                simpleReminderBot.execute(SendMessage.builder()
+                        .chatId(callbackQuery.getMessage().getChatId())
+                        .text(answer)
+                        .build()
+                )
         );
     }
 
     @Override
     public void answerMessage(Message message, SimpleReminderBot simpleReminderBot, String answer)
             throws TelegramApiException {
-        simpleReminderBot.execute(SendMessage.builder()
-                .chatId(message.getChatId())
-                .text(answer)
-                .build()
+        simpleReminderBot.getUserDataCache().setLastBotMessage(
+                simpleReminderBot.execute(SendMessage.builder()
+                        .chatId(message.getChatId())
+                        .text(answer)
+                        .build()
+                )
         );
     }
 
     @Override
-    public void answerMessage(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot, String answer
+    public Message answerMessage(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot, String answer
             , ReplyKeyboard replyKeyboard) throws TelegramApiException {
-        simpleReminderBot.execute(SendMessage.builder()
+
+        return simpleReminderBot.execute(SendMessage.builder()
                 .chatId(callbackQuery.getMessage().getChatId())
                 .text(answer)
                 .replyMarkup(replyKeyboard)
                 .build()
         );
+
     }
 
     @Override
@@ -60,6 +66,24 @@ public class AnswerMessageImpl implements AnswerMessage {
                 .messageId(message.getMessageId())
                 .build()
         );
+    }
+
+    @Override
+    public void deleteLastBotMessageIfPresent(Message message, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException {
+        if (simpleReminderBot.getUserDataCache().lastBotMessageIsPresent(message.getChatId())) {
+            deleteMessage(simpleReminderBot.getUserDataCache().getlastBotMessage(message.getChatId())
+                    , simpleReminderBot);
+        }
+    }
+
+    @Override
+    public void deleteLastBotMessageIfPresent(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException {
+        if (simpleReminderBot.getUserDataCache().lastBotMessageIsPresent(callbackQuery.getMessage().getChatId())) {
+            deleteMessage(simpleReminderBot.getUserDataCache().getlastBotMessage(callbackQuery.getMessage().getChatId())
+                    , simpleReminderBot);
+        }
     }
 
     @Override

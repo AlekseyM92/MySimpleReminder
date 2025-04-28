@@ -10,7 +10,7 @@ public interface AnswerMessage {
     public void answerMessage(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot, String answer)
             throws TelegramApiException;
 
-    public void answerMessage(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot, String answer
+    public Message answerMessage(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot, String answer
             , ReplyKeyboard replyKeyboard) throws TelegramApiException;
 
     public void answerMessage(Message message, SimpleReminderBot simpleReminderBot, String answer
@@ -20,6 +20,12 @@ public interface AnswerMessage {
             throws TelegramApiException;
 
     public void deleteUserErrorMessageIfPresent(Message message, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException;
+
+    public void deleteLastBotMessageIfPresent(Message message, SimpleReminderBot simpleReminderBot)
+            throws TelegramApiException;
+
+    public void deleteLastBotMessageIfPresent(CallbackQuery callbackQuery, SimpleReminderBot simpleReminderBot)
             throws TelegramApiException;
 
     public void deleteMessage(Message message, SimpleReminderBot simpleReminderBot) throws TelegramApiException;

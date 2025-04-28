@@ -7,8 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ReminderRepository extends JpaRepository<Reminder, Long> {
-    List<Reminder> findAllByChatId(Long chatId);
-
     void deleteAllByChatId(Long chatId);
 
     List<Reminder> findAllByChatIdAndDateReminder(Long chatId, LocalDate dateReminder);
@@ -16,4 +14,8 @@ public interface ReminderRepository extends JpaRepository<Reminder, Long> {
     List<Reminder> findAllByDateReminderAndDeliveredIs(LocalDate dateReminder, boolean delivered);
 
     int deleteByDelivered(boolean delivered);
+
+    List<Reminder> findByChatIdAndDelivered(Long chatId, boolean delivered);
+
+    List<Reminder> findByChatId(Long chatId);
 }

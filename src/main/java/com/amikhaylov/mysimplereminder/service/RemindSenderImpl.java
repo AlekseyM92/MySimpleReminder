@@ -26,7 +26,7 @@ public class RemindSenderImpl implements RemindSender {
                 .text("Внимание! Вам напоминание: \n")
                 .build()
         );
-        if (reminder.getFilePath() != null && reminder.getFilePath().endsWith(".txt")) {
+        if (reminder.getFilePath().endsWith(".txt")) {
             String str1 = "";
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(reminder.getFilePath()))) {
                 while (bufferedReader.ready()) {
@@ -42,7 +42,7 @@ public class RemindSenderImpl implements RemindSender {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else if (reminder.getFilePath() != null && reminder.getFilePath().endsWith(".ogg")) {
+        } else if (reminder.getFilePath().endsWith(".ogg")) {
             InputFile inputFile = new InputFile(new File(reminder.getFilePath()));
             SendVoice sendVoice = SendVoice.builder()
                     .voice(inputFile)

@@ -51,7 +51,8 @@ public class ReminderScheduler {
         }
     }
 
-    @Scheduled(initialDelay = 120000, fixedRate = 120000)
+    //@Scheduled(initialDelay = 120000, fixedRate = 120000)
+    @Scheduled(cron = "@hourly")
     public void deleteReminders () {
         int r;
         r = reminderRepositoryService.deleteDeliveredReminders();

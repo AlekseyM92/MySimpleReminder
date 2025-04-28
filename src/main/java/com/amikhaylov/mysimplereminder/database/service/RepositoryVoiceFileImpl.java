@@ -30,8 +30,7 @@ public class RepositoryVoiceFileImpl implements RepositoryVoiceFile {
     }
 
     @Override
-    public InputFile getVoice(Long reminderId) {
-        Reminder reminder = reminderRepositoryService.getReminder(reminderId);
+    public InputFile getVoice(Reminder reminder) {
         if (reminder != null && reminder.getFilePath().endsWith(".ogg")) {
             return new InputFile(new File(reminder.getFilePath()));
         }

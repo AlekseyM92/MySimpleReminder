@@ -1,17 +1,18 @@
 package com.amikhaylov.mysimplereminder.cache;
 
+import com.amikhaylov.mysimplereminder.database.entity.Reminder;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @NoArgsConstructor
 public class UserDataCache {
     private Map<Long, Message> userErrorMessage = new HashMap<>();
+    private Map<Long, Message> lastBotMessage = new HashMap<>();
     private Map<Long, BotStatus> userStateData = new HashMap<>();
     private Map<Long, String> userChoiceOfMonth = new HashMap<>();
     private Map<Long, String> userChoiceOfDay = new HashMap<>();
@@ -19,6 +20,8 @@ public class UserDataCache {
     private Map<Long, Message> reminderTextMessage = new HashMap<>();
     private Map<Long, Integer> reminderYear = new HashMap<>();
     private Map<Long, String> userName = new HashMap<>();
+    private Map<Long, List<Reminder>> userReminders = new HashMap<>();
+    private Map<Long, List<Map<Long, Message>>> tempUserMessages = new HashMap<>();
 
     public BotStatus getUserState(Long chatId) {
         if (userStateData.containsKey(chatId)) {
@@ -37,6 +40,57 @@ public class UserDataCache {
         deleteReminderVoiceMessage(chatId);
         deleteReminderTextMessage(chatId);
         deleteReminderYear(chatId);
+        deleteLastBotMessage(chatId);
+        deleteUserReminders(chatId);
+        deleteTempUserMessages(chatId);
+    }
+
+    public List<Map<Long, Message>> getTempUserMessages(Long chatId) {
+        return tempUserMessages.getOrDefault(chatId, Collections.emptyList());
+    }
+
+    public void setTempUserMessages(Long chatId, List<Map<Long, Message>> messages) {
+        tempUserMessages.put(chatId, messages);
+    }
+
+    public void deleteTempUserMessages(Long chatId) {
+        if (tempUserMessages.containsKey(chatId)) {
+            tempUserMessages.remove(chatId);
+        }
+    }
+
+    public List<Reminder> getUserReminders(Long chatId) {
+        if (userReminders.containsKey(chatId)) {
+            return userReminders.get(chatId);
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public void setUserReminders(Long chatId, List<Reminder> reminders) {
+        userReminders.put(chatId, reminders);
+    }
+
+    public void deleteUserReminders(Long chatId) {
+        if (userReminders.containsKey(chatId)) {
+            userReminders.remove(chatId);
+        }
+    }
+
+    public Message getlastBotMessage(Long chatId) {
+        return lastBotMessage.get(chatId);
+    }
+
+    public boolean lastBotMessageIsPresent(Long chatId) {
+        return lastBotMessage.containsKey(chatId);
+    }
+
+    public void setLastBotMessage(Message message) {
+        lastBotMessage.put(message.getChatId(), message);
+    }
+
+    public void deleteLastBotMessage(Long chatId) {
+        lastBotMessage.remove(chatId);
     }
 
     public Message getUserErrorMessage(Long chatId) {
