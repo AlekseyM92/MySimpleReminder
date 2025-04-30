@@ -11,17 +11,18 @@ import java.util.*;
 @Component
 @NoArgsConstructor
 public class UserDataCache {
-    private Map<Long, Message> userErrorMessage = new HashMap<>();
-    private Map<Long, Message> lastBotMessage = new HashMap<>();
-    private Map<Long, BotStatus> userStateData = new HashMap<>();
-    private Map<Long, String> userChoiceOfMonth = new HashMap<>();
-    private Map<Long, String> userChoiceOfDay = new HashMap<>();
-    private Map<Long, Message> reminderVoiceMessage = new HashMap<>();
-    private Map<Long, Message> reminderTextMessage = new HashMap<>();
-    private Map<Long, Integer> reminderYear = new HashMap<>();
-    private Map<Long, String> userName = new HashMap<>();
-    private Map<Long, List<Reminder>> userReminders = new HashMap<>();
-    private Map<Long, List<Map<Long, Message>>> tempUserMessages = new HashMap<>();
+    private final Map<Long, Message> userErrorMessage = new HashMap<>();
+    private final Map<Long, Message> lastBotMessage = new HashMap<>();
+    private final Map<Long, BotStatus> userStateData = new HashMap<>();
+    private final Map<Long, String> userChoiceOfMonth = new HashMap<>();
+    private final Map<Long, String> userChoiceOfDay = new HashMap<>();
+    private final Map<Long, Message> reminderVoiceMessage = new HashMap<>();
+    private final Map<Long, Message> reminderTextMessage = new HashMap<>();
+    private final Map<Long, Integer> reminderYear = new HashMap<>();
+    private final Map<Long, String> userName = new HashMap<>();
+    private final Map<Long, List<Reminder>> userReminders = new HashMap<>();
+    private final Map<Long, List<Map<Long, Message>>> tempUserMessages = new HashMap<>();
+    private final Map<Long, Reminder> editReminder = new HashMap<>();
 
     public BotStatus getUserState(Long chatId) {
         if (userStateData.containsKey(chatId)) {
@@ -43,6 +44,19 @@ public class UserDataCache {
         deleteLastBotMessage(chatId);
         deleteUserReminders(chatId);
         deleteTempUserMessages(chatId);
+        deleteEditReminder(chatId);
+    }
+
+    public void setEditReminder(Long chatId, Reminder reminder) {
+        editReminder.put(chatId, reminder);
+    }
+
+    public Reminder getEditReminder(Long chatId) {
+        return editReminder.get(chatId);
+    }
+
+    public void deleteEditReminder(Long chatId) {
+        editReminder.remove(chatId);
     }
 
     public List<Map<Long, Message>> getTempUserMessages(Long chatId) {

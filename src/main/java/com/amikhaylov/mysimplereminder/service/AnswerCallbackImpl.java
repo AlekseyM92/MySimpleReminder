@@ -67,7 +67,6 @@ public class AnswerCallbackImpl implements AnswerCallback {
                     }
                 }
             }
-            simpleReminderBot.getUserDataCache().deleteTempUserMessages(callbackQuery.getMessage().getChatId());
         }
     }
 

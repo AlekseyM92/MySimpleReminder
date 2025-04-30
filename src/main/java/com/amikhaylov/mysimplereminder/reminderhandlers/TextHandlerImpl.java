@@ -97,22 +97,6 @@ public class TextHandlerImpl implements TextHandler {
                         answerMessage.answerMessage(message, simpleReminderBot
                                 , "У вас нет запланированных напоминаний!");
                     }
-//                    List<InputFile> inputFiles = repositoryVoiceFile.getVoicesByChatId(chatId);
-//                    if (!inputFiles.isEmpty()) {
-//                        answerMessage.answerMessage(message, simpleReminderBot
-//                                , "Ваш список голосовых напоминаний:\n");
-//                        for (InputFile inputFile : inputFiles) {
-//                            log.info(inputFile.getNewMediaFile().getAbsolutePath());
-//                            SendVoice sendVoice = SendVoice.builder()
-//                                    .voice(inputFile)
-//                                    .chatId(message.getChatId()).caption("Ха-Ха")
-//                                    .build();
-//                            simpleReminderBot.execute(sendVoice);
-//                        }
-//                    } else {
-//                        answerMessage.answerMessage(message, simpleReminderBot
-//                                , "У вас нет голосовых напоминаний!");
-//                    }
                     break;
                 case "/delete_all_reminders":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
@@ -130,21 +114,17 @@ public class TextHandlerImpl implements TextHandler {
                                     " и следуйте дальнейшим инструкциям.\n" +
                                     "Для вывода всего списка напоминаний выберите команду /my_reminders.\n" +
                                     "Для удаления всех напоминаний выберите команду /delete_all_reminders.\n" +
-                                    "Для вывода описания функционала бота выберите команду /description.\n" +
-                                    "Для остановки бота выберите команду /terminate_bot, при этом все запланированные" +
-                                    " напоминания будут удалены.");
+                                    "Для вывода описания функционала бота выберите команду /description.");
                     break;
                 case "/language":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
                     answerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
                     answerMessage.deleteLastBotMessageIfPresent(message, simpleReminderBot);
-                    answerMessage.answerMessage(message, simpleReminderBot, "Вы нажали /language");
                     break;
                 case "/terminate_bot":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
                     answerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
                     answerMessage.deleteLastBotMessageIfPresent(message, simpleReminderBot);
-                    answerMessage.answerMessage(message, simpleReminderBot, "Вы нажали /terminate_bot");
                     break;
                 case "/description":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);

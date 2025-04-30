@@ -1017,3 +1017,446 @@
 2025-04-16 15:40:46 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
 2025-04-16 16:28:21 INFO  TextHandlerImpl:80 - C:\MyIdeaProjects\ReminderSavedVoice\1577747853_2454_Алексей-Михайлов.ogg
 2025-04-16 16:47:26 INFO  TextHandlerImpl:80 - C:\MyIdeaProjects\ReminderSavedVoice\1577747853_2454_Алексей-Михайлов.ogg
+2025-04-23 21:12:11 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2172_Алексей-Михайлов.ogg
+2025-04-23 21:12:12 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2201_Алексей-Михайлов.ogg
+2025-04-23 21:12:12 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2283_Алексей-Михайлов.ogg
+2025-04-23 21:12:12 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2349_Алексей-Михайлов.ogg
+2025-04-23 22:58:33 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2172_Алексей-Михайлов.ogg
+2025-04-23 22:58:34 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2201_Алексей-Михайлов.ogg
+2025-04-23 22:58:34 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2283_Алексей-Михайлов.ogg
+2025-04-23 22:58:34 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2349_Алексей-Михайлов.ogg
+2025-04-23 22:58:34 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2608_Алексей-Михайлов.ogg
+2025-04-23 22:59:53 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2172_Алексей-Михайлов.ogg
+2025-04-23 22:59:54 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2201_Алексей-Михайлов.ogg
+2025-04-23 22:59:54 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2283_Алексей-Михайлов.ogg
+2025-04-23 22:59:54 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2349_Алексей-Михайлов.ogg
+2025-04-23 22:59:54 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2608_Алексей-Михайлов.ogg
+2025-04-23 22:59:55 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2624_Алексей-Михайлов.ogg
+2025-04-23 23:40:07 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:40:07.468044500
+2025-04-23 23:41:07 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:41:07.470159500
+2025-04-23 23:42:07 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:42:07.479606300
+2025-04-23 23:43:07 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:43:07.465649500
+2025-04-23 23:44:07 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:44:07.467073900
+2025-04-23 23:45:07 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:45:07.467626100
+2025-04-23 23:46:07 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:46:07.467711300
+2025-04-23 23:48:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:48:00.018242100
+2025-04-23 23:49:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:49:00.009104900
+2025-04-23 23:50:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:50:00.009682200
+2025-04-23 23:51:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:51:00.000866700
+2025-04-23 23:52:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:52:00.008106700
+2025-04-23 23:53:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:53:00.007857900
+2025-04-23 23:54:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:54:00.000622400
+2025-04-23 23:55:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:55:00.014847200
+2025-04-23 23:56:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:56:00.011577
+2025-04-23 23:57:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:57:00.014127600
+2025-04-23 23:58:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:58:00.012902400
+2025-04-23 23:59:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-23T23:59:00.015399
+2025-04-24 00:00:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:00:00.009230800
+2025-04-24 00:01:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:01:00.010755600
+2025-04-24 00:02:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:02:00.002320500
+2025-04-24 00:03:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:03:00.010433800
+2025-04-24 00:04:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:04:00.004820300
+2025-04-24 00:05:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:05:00.006373
+2025-04-24 00:06:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:06:00.007968100
+2025-04-24 00:07:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:07:00.015760
+2025-04-24 00:08:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:08:00.010388900
+2025-04-24 00:09:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:09:00.006594
+2025-04-24 00:10:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:10:00.007884300
+2025-04-24 00:11:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:11:00.012611300
+2025-04-24 00:12:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:12:00.010324300
+2025-04-24 00:13:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:13:00.009649900
+2025-04-24 00:14:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:14:00.011627300
+2025-04-24 00:15:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:15:00.015848
+2025-04-24 00:16:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:16:00.000744400
+2025-04-24 00:17:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:17:00.001874600
+2025-04-24 00:18:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:18:00.011160200
+2025-04-24 00:19:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:19:00.000945400
+2025-04-24 00:20:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:20:00.007734400
+2025-04-24 00:21:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:21:00.007204500
+2025-04-24 00:22:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:22:00.009228800
+2025-04-24 00:23:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:23:00.000347100
+2025-04-24 00:24:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:24:00.015091
+2025-04-24 00:25:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:25:00.005856100
+2025-04-24 00:26:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:26:00.012378600
+2025-04-24 00:27:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:27:00.008076700
+2025-04-24 00:28:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:28:00.013775700
+2025-04-24 00:29:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:29:00.016221300
+2025-04-24 00:30:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:30:00.008784500
+2025-04-24 00:31:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:31:00.005810600
+2025-04-24 00:32:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:32:00.009222300
+2025-04-24 00:33:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:33:00.013591900
+2025-04-24 00:34:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:34:00.007025200
+2025-04-24 00:35:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:35:00.003240200
+2025-04-24 00:36:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:36:00.008432
+2025-04-24 00:37:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:37:00.001174200
+2025-04-24 00:38:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:38:00.009785500
+2025-04-24 00:39:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:39:00.013027500
+2025-04-24 00:40:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:40:00.013582500
+2025-04-24 00:41:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:41:00.009562600
+2025-04-24 00:42:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:42:00.002311400
+2025-04-24 00:43:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:43:00.006178900
+2025-04-24 00:44:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:44:00.005443800
+2025-04-24 00:45:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:45:00.012675600
+2025-04-24 00:46:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:46:00.015158500
+2025-04-24 00:47:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:47:00.004119600
+2025-04-24 00:48:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:48:00.005956200
+2025-04-24 00:49:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:49:00.010979
+2025-04-24 00:50:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:50:00.014653400
+2025-04-24 00:51:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:51:00.015010300
+2025-04-24 00:52:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:52:00.014659400
+2025-04-24 00:53:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:53:00.010477200
+2025-04-24 00:54:00 INFO  ReminderScheduler:23 - Reminder started at 2025-04-24T00:54:00.002404400
+2025-04-24 00:58:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T00:58:00.019863600
+2025-04-24 00:59:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T00:59:00.012330200
+2025-04-24 01:00:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T01:00:00.005583200
+2025-04-24 01:01:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T01:01:00.004595900
+2025-04-24 01:02:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T01:02:00.014978200
+2025-04-24 01:03:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T01:03:00.013660
+2025-04-24 01:12:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T01:12:00.101795200
+2025-04-24 01:13:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T01:13:00.002462300
+2025-04-24 21:00:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T21:00:00.102698
+2025-04-24 21:03:00 INFO  ReminderScheduler:36 - Reminder started at 2025-04-24T21:03:00.014495100
+2025-04-24 21:50:30 INFO  ReminderScheduler:52 - Deleted 12 reminders
+2025-04-24 21:52:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 21:54:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 21:56:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 21:58:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:00:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:02:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:04:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:06:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:08:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:10:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:12:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:14:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:16:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:18:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:20:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:22:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:24:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:26:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:28:30 INFO  ReminderScheduler:52 - Deleted 0 reminders
+2025-04-24 22:31:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:33:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:34:00 INFO  ReminderScheduler:37 - Reminder started at 2025-04-24T22:34:00.012175300
+2025-04-24 22:34:00 INFO  ReminderScheduler:45 - File C:\SimpleReminderSavedText\1577747853_2733_Алексей-Михайлов.txt is deleted: true
+2025-04-24 22:34:00 INFO  ReminderScheduler:45 - File C:\SimpleReminderSavedVoice\1577747853_2741_Алексей-Михайлов.ogg is deleted: true
+2025-04-24 22:35:13 INFO  ReminderScheduler:58 - Deleted 2 reminders
+2025-04-24 22:37:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:39:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:41:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:43:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:45:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:47:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:49:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:51:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:53:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:55:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:57:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 22:59:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:01:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:03:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:05:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:07:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:09:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:11:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:13:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:15:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:17:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:19:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:21:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:23:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:25:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-24 23:27:13 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:05:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:07:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:09:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:11:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:13:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:15:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:17:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:19:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:21:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:23:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:25:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:27:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:29:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:31:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:33:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:35:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:37:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:39:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:41:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:43:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:45:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:47:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:49:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:51:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:53:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:55:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:57:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 22:59:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:01:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:03:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:05:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:07:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:09:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:11:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:13:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:15:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:17:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:19:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:21:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:23:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:25:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:27:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:29:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:31:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:33:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:35:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:37:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:39:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:41:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:43:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:45:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:47:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:49:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:51:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:53:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:55:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:57:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-25 23:59:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:01:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:03:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:05:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:07:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:09:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:11:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:13:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:15:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:17:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:19:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:21:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:23:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:25:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:27:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:29:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:31:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:33:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:35:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:37:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:39:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:41:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:43:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:45:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:47:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:49:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:51:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:53:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:55:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:57:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 00:59:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:01:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:03:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:05:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:07:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:09:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:11:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:13:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:15:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:17:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:19:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:21:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:23:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:25:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:27:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:29:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:31:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:33:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:35:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:37:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:39:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:41:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:43:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:45:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:47:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:49:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:51:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:53:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:55:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:57:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 01:59:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:01:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:03:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:05:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:07:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:09:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:11:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:13:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:15:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:17:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:19:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:21:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:23:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-26 02:25:45 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-27 13:27:00 INFO  ReminderScheduler:37 - Reminder started at 2025-04-27T13:27:00.122542700
+2025-04-27 13:27:00 INFO  ReminderScheduler:45 - File C:\SimpleReminderSavedText\1577747853_2769_Алексей-Михайлов.txt is deleted: true
+2025-04-27 13:28:56 INFO  ReminderScheduler:58 - Deleted 1 reminders
+2025-04-27 13:30:56 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-27 13:32:56 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-27 13:34:56 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-27 13:36:56 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-27 13:38:56 INFO  ReminderScheduler:58 - Deleted 0 reminders
+2025-04-27 13:45:25 INFO  TextHandlerImpl:79 - C:\SimpleReminderSavedVoice\1577747853_2785_Алексей-Михайлов.ogg
+2025-04-27 14:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 15:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 15:24:03 ERROR SimpleReminderBot:62 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 15:28:05 ERROR SimpleReminderBot:62 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 16:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 17:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 17:35:37 INFO  TextHandlerImpl:89 - C:\SimpleReminderSavedVoice\1577747853_2785_Алексей-Михайлов.ogg
+2025-04-27 18:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 19:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 19:58:16 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 19:58:43 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 19:59:01 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 19:59:06 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 19:59:07 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 19:59:09 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 20:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 20:02:27 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 20:02:38 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 20:02:50 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 20:02:55 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-27 21:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 21:53:54 INFO  CallbackHandlerImpl:331 - {49=Message(messageId=3256, messageThreadId=null, from=User(id=7542408715, firstName=MySimpleReminder, isBot=true, lastName=null, userName=MySimpleReminderBot, languageCode=null, canJoinGroups=null, canReadAllGroupMessages=null, supportInlineQueries=null, isPremium=null, addedToAttachmentMenu=null), date=1745776427, chat=Chat(id=1577747853, type=private, title=null, firstName=Алексей, lastName=Михайлов, userName=amikhayl, photo=null, description=null, inviteLink=null, pinnedMessage=null, stickerSetName=null, canSetStickerSet=null, permissions=null, slowModeDelay=null, bio=null, linkedChatId=null, location=null, messageAutoDeleteTime=null, hasPrivateForwards=null, HasProtectedContent=null, joinToSendMessages=null, joinByRequest=null, hasRestrictedVoiceAndVideoMessages=null, isForum=null, activeUsernames=null, emojiStatusCustomEmojiId=null, hasAggressiveAntiSpamEnabled=null, hasHiddenMembers=null, emojiStatusExpirationDate=null, availableReactions=null, accentColorId=null, backgroundCustomEmojiId=null, profileAccentColorId=null, profileBackgroundCustomEmojiId=null, hasVisibleHistory=null, unrestrictBoostCount=null, customEmojiStickerSetName=null), forwardFrom=null, forwardFromChat=null, forwardDate=null, text=null, entities=null, captionEntities=null, audio=null, document=null, photo=null, sticker=null, video=null, contact=null, location=null, venue=null, animation=null, pinnedMessage=null, newChatMembers=[], leftChatMember=null, newChatTitle=null, newChatPhoto=null, deleteChatPhoto=null, groupchatCreated=null, replyToMessage=null, voice=Voice(fileId=AwACAgIAAxkDAAIMuGgObytAGi7HbRT6CjOAHP1APHlGAAIqdAACFU9xSLKob4fWpIbTNgQ, fileUniqueId=AgADKnQAAhVPcUg, duration=2, mimeType=audio/ogg, fileSize=42072), caption=Напоминание № 1:
+Дата создания напоминания: 27.04.2025 13:45:12
+Дата напоминания: 26.06.2025, superGroupCreated=null, channelChatCreated=null, migrateToChatId=null, migrateFromChatId=null, editDate=null, game=null, forwardFromMessageId=null, invoice=null, successfulPayment=null, videoNote=null, authorSignature=null, forwardSignature=null, mediaGroupId=null, connectedWebsite=null, passportData=null, forwardSenderName=null, poll=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=Изменить, url=null, callbackData=edit_reminder, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null), InlineKeyboardButton(text=Удалить, url=null, callbackData=delete_reminder, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), dice=null, viaBot=null, senderChat=null, proximityAlertTriggered=null, messageAutoDeleteTimerChanged=null, isAutomaticForward=null, hasProtectedContent=null, webAppData=null, videoChatStarted=null, videoChatEnded=null, videoChatParticipantsInvited=null, videoChatScheduled=null, isTopicMessage=null, forumTopicCreated=null, forumTopicClosed=null, forumTopicReopened=null, forumTopicEdited=null, generalForumTopicHidden=null, generalForumTopicUnhidden=null, writeAccessAllowed=null, hasMediaSpoiler=null, userShared=null, chatShared=null, story=null, externalReplyInfo=null, forwardOrigin=null, linkPreviewOptions=null, quote=null, usersShared=null, giveawayCreated=null, giveaway=null, giveawayWinners=null, giveawayCompleted=null, replyToStory=null, boostAdded=null, senderBoostCount=null)}
+2025-04-27 22:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 23:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-27 23:58:35 INFO  CallbackHandlerImpl:340 - File C:\SimpleReminderSavedText\1577747853_3065_Алексей-Михайлов.txt is deleted: true
+2025-04-27 23:58:41 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-28 00:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-28 00:00:00 INFO  ReminderScheduler:37 - Reminder started at 2025-04-28T00:00:00.017832900
+2025-04-28 00:00:00 INFO  ReminderScheduler:45 - File C:\SimpleReminderSavedText\1151317037_3135_Ирина-Михайлова.txt is deleted: true
+2025-04-28 00:00:00 INFO  ReminderScheduler:45 - File C:\SimpleReminderSavedVoice\1151317037_3144_Ирина-Михайлова.ogg is deleted: true
+2025-04-28 00:10:03 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_2907_Алексей-Михайлов.txt is deleted: true
+2025-04-28 00:17:46 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedVoice\1577747853_2785_Алексей-Михайлов.ogg is deleted: true
+2025-04-28 00:17:48 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-28 00:40:45 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3287_Алексей-Михайлов.txt is deleted: true
+2025-04-28 00:43:54 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3295_Алексей-Михайлов.txt is deleted: true
+2025-04-28 00:43:54 INFO  CallbackHandlerImpl:349 - {55=Message(messageId=3333, messageThreadId=null, from=User(id=7542408715, firstName=MySimpleReminder, isBot=true, lastName=null, userName=MySimpleReminderBot, languageCode=null, canJoinGroups=null, canReadAllGroupMessages=null, supportInlineQueries=null, isPremium=null, addedToAttachmentMenu=null), date=1745786629, chat=Chat(id=1577747853, type=private, title=null, firstName=Алексей, lastName=Михайлов, userName=amikhayl, photo=null, description=null, inviteLink=null, pinnedMessage=null, stickerSetName=null, canSetStickerSet=null, permissions=null, slowModeDelay=null, bio=null, linkedChatId=null, location=null, messageAutoDeleteTime=null, hasPrivateForwards=null, HasProtectedContent=null, joinToSendMessages=null, joinByRequest=null, hasRestrictedVoiceAndVideoMessages=null, isForum=null, activeUsernames=null, emojiStatusCustomEmojiId=null, hasAggressiveAntiSpamEnabled=null, hasHiddenMembers=null, emojiStatusExpirationDate=null, availableReactions=null, accentColorId=null, backgroundCustomEmojiId=null, profileAccentColorId=null, profileBackgroundCustomEmojiId=null, hasVisibleHistory=null, unrestrictBoostCount=null, customEmojiStickerSetName=null), forwardFrom=null, forwardFromChat=null, forwardDate=null, text=Напоминание № 1:
+Дата создания напоминания: 28.04.2025 00:39:52
+Дата напоминания: 29.04.2025
+Текст напоминания:
+"Напоминание № 2", entities=null, captionEntities=null, audio=null, document=null, photo=null, sticker=null, video=null, contact=null, location=null, venue=null, animation=null, pinnedMessage=null, newChatMembers=[], leftChatMember=null, newChatTitle=null, newChatPhoto=null, deleteChatPhoto=null, groupchatCreated=null, replyToMessage=null, voice=null, caption=null, superGroupCreated=null, channelChatCreated=null, migrateToChatId=null, migrateFromChatId=null, editDate=null, game=null, forwardFromMessageId=null, invoice=null, successfulPayment=null, videoNote=null, authorSignature=null, forwardSignature=null, mediaGroupId=null, connectedWebsite=null, passportData=null, forwardSenderName=null, poll=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=Изменить, url=null, callbackData=edit_reminder, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null), InlineKeyboardButton(text=Удалить, url=null, callbackData=delete_reminder, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), dice=null, viaBot=null, senderChat=null, proximityAlertTriggered=null, messageAutoDeleteTimerChanged=null, isAutomaticForward=null, hasProtectedContent=null, webAppData=null, videoChatStarted=null, videoChatEnded=null, videoChatParticipantsInvited=null, videoChatScheduled=null, isTopicMessage=null, forumTopicCreated=null, forumTopicClosed=null, forumTopicReopened=null, forumTopicEdited=null, generalForumTopicHidden=null, generalForumTopicUnhidden=null, writeAccessAllowed=null, hasMediaSpoiler=null, userShared=null, chatShared=null, story=null, externalReplyInfo=null, forwardOrigin=null, linkPreviewOptions=null, quote=null, usersShared=null, giveawayCreated=null, giveaway=null, giveawayWinners=null, giveawayCompleted=null, replyToStory=null, boostAdded=null, senderBoostCount=null)}
+2025-04-28 00:45:47 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3305_Алексей-Михайлов.txt is deleted: true
+2025-04-28 00:46:02 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3325_Алексей-Михайлов.txt is deleted: true
+2025-04-28 00:46:10 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-28 00:58:06 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3365_Алексей-Михайлов.txt is deleted: true
+2025-04-28 00:58:17 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3373_Алексей-Михайлов.txt is deleted: true
+2025-04-28 00:58:20 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3381_Алексей-Михайлов.txt is deleted: true
+2025-04-28 00:58:24 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-28 01:00:00 INFO  ReminderScheduler:59 - Deleted 2 reminders
+2025-04-28 01:07:39 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3397_Алексей-Михайлов.txt is deleted: true
+2025-04-28 01:10:21 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3408_Алексей-Михайлов.txt is deleted: true
+2025-04-28 01:19:25 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3416_Алексей-Михайлов.txt is deleted: true
+2025-04-28 01:30:39 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3432_Алексей-Михайлов.txt is deleted: true
+2025-04-28 01:30:47 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-28 01:32:37 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3440_Алексей-Михайлов.txt is deleted: true
+2025-04-28 21:52:23 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3469_Алексей-Михайлов.txt is deleted: true
+2025-04-28 21:54:51 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-28 21:55:41 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3477_Алексей-Михайлов.txt is deleted: true
+2025-04-28 21:55:52 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-28 21:57:08 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3485_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:06:37 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-28 22:08:28 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3523_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:21:04 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3531_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:32:03 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3539_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:32:44 INFO  CallbackHandlerImpl:341 - File C:\SimpleReminderSavedText\1577747853_3562_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:48:03 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3585_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:48:13 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3593_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:48:17 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3601_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:53:14 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3624_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:53:16 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3632_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:53:18 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3640_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:55:18 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3656_Алексей-Михайлов.txt is deleted: true
+2025-04-28 22:55:18 INFO  CallbackHandlerImpl:357 - [{79=Message(messageId=3673, messageThreadId=null, from=User(id=7542408715, firstName=MySimpleReminder, isBot=true, lastName=null, userName=MySimpleReminderBot, languageCode=null, canJoinGroups=null, canReadAllGroupMessages=null, supportInlineQueries=null, isPremium=null, addedToAttachmentMenu=null), date=1745866509, chat=Chat(id=1577747853, type=private, title=null, firstName=Алексей, lastName=Михайлов, userName=amikhayl, photo=null, description=null, inviteLink=null, pinnedMessage=null, stickerSetName=null, canSetStickerSet=null, permissions=null, slowModeDelay=null, bio=null, linkedChatId=null, location=null, messageAutoDeleteTime=null, hasPrivateForwards=null, HasProtectedContent=null, joinToSendMessages=null, joinByRequest=null, hasRestrictedVoiceAndVideoMessages=null, isForum=null, activeUsernames=null, emojiStatusCustomEmojiId=null, hasAggressiveAntiSpamEnabled=null, hasHiddenMembers=null, emojiStatusExpirationDate=null, availableReactions=null, accentColorId=null, backgroundCustomEmojiId=null, profileAccentColorId=null, profileBackgroundCustomEmojiId=null, hasVisibleHistory=null, unrestrictBoostCount=null, customEmojiStickerSetName=null), forwardFrom=null, forwardFromChat=null, forwardDate=null, text=Напоминание № 1:
+Дата создания напоминания: 28.04.2025 22:54:46
+Дата напоминания: 10.05.2025
+Текст напоминания:
+"ftcgfghvhv", entities=null, captionEntities=null, audio=null, document=null, photo=null, sticker=null, video=null, contact=null, location=null, venue=null, animation=null, pinnedMessage=null, newChatMembers=[], leftChatMember=null, newChatTitle=null, newChatPhoto=null, deleteChatPhoto=null, groupchatCreated=null, replyToMessage=null, voice=null, caption=null, superGroupCreated=null, channelChatCreated=null, migrateToChatId=null, migrateFromChatId=null, editDate=null, game=null, forwardFromMessageId=null, invoice=null, successfulPayment=null, videoNote=null, authorSignature=null, forwardSignature=null, mediaGroupId=null, connectedWebsite=null, passportData=null, forwardSenderName=null, poll=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=Изменить, url=null, callbackData=edit_reminder, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null), InlineKeyboardButton(text=Удалить, url=null, callbackData=delete_reminder, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), dice=null, viaBot=null, senderChat=null, proximityAlertTriggered=null, messageAutoDeleteTimerChanged=null, isAutomaticForward=null, hasProtectedContent=null, webAppData=null, videoChatStarted=null, videoChatEnded=null, videoChatParticipantsInvited=null, videoChatScheduled=null, isTopicMessage=null, forumTopicCreated=null, forumTopicClosed=null, forumTopicReopened=null, forumTopicEdited=null, generalForumTopicHidden=null, generalForumTopicUnhidden=null, writeAccessAllowed=null, hasMediaSpoiler=null, userShared=null, chatShared=null, story=null, externalReplyInfo=null, forwardOrigin=null, linkPreviewOptions=null, quote=null, usersShared=null, giveawayCreated=null, giveaway=null, giveawayWinners=null, giveawayCompleted=null, replyToStory=null, boostAdded=null, senderBoostCount=null)}, {80=Message(messageId=3674, messageThreadId=null, from=User(id=7542408715, firstName=MySimpleReminder, isBot=true, lastName=null, userName=MySimpleReminderBot, languageCode=null, canJoinGroups=null, canReadAllGroupMessages=null, supportInlineQueries=null, isPremium=null, addedToAttachmentMenu=null), date=1745866509, chat=Chat(id=1577747853, type=private, title=null, firstName=Алексей, lastName=Михайлов, userName=amikhayl, photo=null, description=null, inviteLink=null, pinnedMessage=null, stickerSetName=null, canSetStickerSet=null, permissions=null, slowModeDelay=null, bio=null, linkedChatId=null, location=null, messageAutoDeleteTime=null, hasPrivateForwards=null, HasProtectedContent=null, joinToSendMessages=null, joinByRequest=null, hasRestrictedVoiceAndVideoMessages=null, isForum=null, activeUsernames=null, emojiStatusCustomEmojiId=null, hasAggressiveAntiSpamEnabled=null, hasHiddenMembers=null, emojiStatusExpirationDate=null, availableReactions=null, accentColorId=null, backgroundCustomEmojiId=null, profileAccentColorId=null, profileBackgroundCustomEmojiId=null, hasVisibleHistory=null, unrestrictBoostCount=null, customEmojiStickerSetName=null), forwardFrom=null, forwardFromChat=null, forwardDate=null, text=Напоминание № 2:
+Дата создания напоминания: 28.04.2025 22:55:05
+Дата напоминания: 19.05.2025
+Текст напоминания:
+"guhghu", entities=null, captionEntities=null, audio=null, document=null, photo=null, sticker=null, video=null, contact=null, location=null, venue=null, animation=null, pinnedMessage=null, newChatMembers=[], leftChatMember=null, newChatTitle=null, newChatPhoto=null, deleteChatPhoto=null, groupchatCreated=null, replyToMessage=null, voice=null, caption=null, superGroupCreated=null, channelChatCreated=null, migrateToChatId=null, migrateFromChatId=null, editDate=null, game=null, forwardFromMessageId=null, invoice=null, successfulPayment=null, videoNote=null, authorSignature=null, forwardSignature=null, mediaGroupId=null, connectedWebsite=null, passportData=null, forwardSenderName=null, poll=null, replyMarkup=InlineKeyboardMarkup(keyboard=[[InlineKeyboardButton(text=Изменить, url=null, callbackData=edit_reminder, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null), InlineKeyboardButton(text=Удалить, url=null, callbackData=delete_reminder, callbackGame=null, switchInlineQuery=null, switchInlineQueryCurrentChat=null, pay=null, loginUrl=null, webApp=null)]]), dice=null, viaBot=null, senderChat=null, proximityAlertTriggered=null, messageAutoDeleteTimerChanged=null, isAutomaticForward=null, hasProtectedContent=null, webAppData=null, videoChatStarted=null, videoChatEnded=null, videoChatParticipantsInvited=null, videoChatScheduled=null, isTopicMessage=null, forumTopicCreated=null, forumTopicClosed=null, forumTopicReopened=null, forumTopicEdited=null, generalForumTopicHidden=null, generalForumTopicUnhidden=null, writeAccessAllowed=null, hasMediaSpoiler=null, userShared=null, chatShared=null, story=null, externalReplyInfo=null, forwardOrigin=null, linkPreviewOptions=null, quote=null, usersShared=null, giveawayCreated=null, giveaway=null, giveawayWinners=null, giveawayCompleted=null, replyToStory=null, boostAdded=null, senderBoostCount=null)}]
+2025-04-28 23:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-28 23:03:31 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3664_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:03:31 INFO  CallbackHandlerImpl:357 - tempUserMessages is empty
+2025-04-28 23:15:07 INFO  CallbackHandlerImpl:344 - File C:\SimpleReminderSavedText\1577747853_3705_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:15:09 INFO  CallbackHandlerImpl:344 - File C:\SimpleReminderSavedText\1577747853_3688_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:15:15 INFO  CallbackHandlerImpl:344 - File C:\SimpleReminderSavedText\1577747853_3696_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:15:15 INFO  CallbackHandlerImpl:358 - tempUserMessages is empty
+2025-04-28 23:15:15 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-28 23:19:08 INFO  CallbackHandlerImpl:344 - File C:\SimpleReminderSavedText\1577747853_3727_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:19:08 INFO  CallbackHandlerImpl:358 - tempUserMessages is empty
+2025-04-28 23:19:44 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-28 23:21:23 INFO  CallbackHandlerImpl:344 - File C:\SimpleReminderSavedText\1577747853_3741_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:24:57 INFO  CallbackHandlerImpl:344 - File C:\SimpleReminderSavedText\1577747853_3759_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:24:57 INFO  CallbackHandlerImpl:358 - tempUserMessages is empty
+2025-04-28 23:27:18 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery query: [400] Bad Request: query is too old and response timeout expired or query ID is invalid
+2025-04-28 23:32:09 INFO  CallbackHandlerImpl:344 - File C:\SimpleReminderSavedText\1577747853_3773_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:32:09 INFO  CallbackHandlerImpl:358 - tempUserMessages is empty
+2025-04-28 23:34:22 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery query: [400] Bad Request: query is too old and response timeout expired or query ID is invalid
+2025-04-28 23:39:11 INFO  CallbackHandlerImpl:344 - File C:\SimpleReminderSavedText\1577747853_3787_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:39:14 INFO  CallbackHandlerImpl:344 - File C:\SimpleReminderSavedText\1577747853_3795_Алексей-Михайлов.txt is deleted: true
+2025-04-28 23:39:14 INFO  CallbackHandlerImpl:358 - All reminders is deleted
+2025-04-29 00:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-29 00:20:15 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-29 00:20:55 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-29 00:21:18 ERROR SimpleReminderBot:55 - Error executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message to delete not found
+2025-04-29 00:46:23 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3814_Алексей-Михайлов.txt is deleted: true
+2025-04-29 00:46:37 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3825_Алексей-Михайлов.txt is deleted: true
+2025-04-29 00:47:13 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3851_Алексей-Михайлов.txt is deleted: true
+2025-04-29 00:47:13 INFO  CallbackHandlerImpl:363 - All reminders is deleted
+2025-04-29 00:49:42 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedVoice\1577747853_3903_Алексей-Михайлов.ogg is deleted: true
+2025-04-29 00:57:50 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3911_Алексей-Михайлов.txt is deleted: true
+2025-04-29 00:57:55 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedVoice\1577747853_3930_Алексей-Михайлов.ogg is deleted: true
+2025-04-29 00:57:55 INFO  CallbackHandlerImpl:363 - All reminders is deleted
+2025-04-29 01:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-29 01:01:35 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_3957_Алексей-Михайлов.txt is deleted: true
+2025-04-29 01:01:37 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedVoice\1577747853_3965_Алексей-Михайлов.ogg is deleted: true
+2025-04-29 01:01:37 INFO  CallbackHandlerImpl:363 - All reminders is deleted
+2025-04-29 01:06:28 INFO  CallbackHandlerImpl:342 - File C:\SimpleReminderSavedText\1577747853_3987_Алексей-Михайлов.txt is deleted: true
+2025-04-29 01:06:32 INFO  CallbackHandlerImpl:342 - File C:\SimpleReminderSavedVoice\1577747853_4002_Алексей-Михайлов.ogg is deleted: true
+2025-04-29 01:06:32 INFO  CallbackHandlerImpl:362 - All reminders is deleted
+2025-04-29 01:08:58 INFO  CallbackHandlerImpl:342 - File C:\SimpleReminderSavedText\1577747853_4015_Алексей-Михайлов.txt is deleted: true
+2025-04-29 01:09:03 INFO  CallbackHandlerImpl:342 - File C:\SimpleReminderSavedText\1577747853_4028_Алексей-Михайлов.txt is deleted: true
+2025-04-29 01:09:03 INFO  CallbackHandlerImpl:362 - All reminders is deleted
+2025-04-29 01:12:19 INFO  CallbackHandlerImpl:342 - File C:\SimpleReminderSavedText\1577747853_4041_Алексей-Михайлов.txt is deleted: true
+2025-04-29 01:12:21 INFO  CallbackHandlerImpl:342 - File C:\SimpleReminderSavedText\1577747853_4049_Алексей-Михайлов.txt is deleted: true
+2025-04-29 01:12:21 INFO  CallbackHandlerImpl:362 - All reminders is deleted
+2025-04-29 01:17:09 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_4064_Алексей-Михайлов.txt is deleted: true
+2025-04-29 01:17:12 INFO  CallbackHandlerImpl:343 - File C:\SimpleReminderSavedText\1577747853_4072_Алексей-Михайлов.txt is deleted: true
+2025-04-29 01:17:12 INFO  CallbackHandlerImpl:363 - All reminders is deleted
+2025-04-29 02:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-29 02:03:57 INFO  CallbackHandlerImpl:346 - File C:\SimpleReminderSavedText\1577747853_4086_Алексей-Михайлов.txt is deleted: true
+2025-04-29 02:27:50 INFO  CallbackHandlerImpl:347 - File C:\SimpleReminderSavedText\1577747853_4112_Алексей-Михайлов.txt is deleted: true
+2025-04-29 02:29:10 INFO  CallbackHandlerImpl:347 - File C:\SimpleReminderSavedText\1577747853_4158_Алексей-Михайлов.txt is deleted: true
+2025-04-29 02:29:38 INFO  CallbackHandlerImpl:347 - File C:\SimpleReminderSavedText\1577747853_4150_Алексей-Михайлов.txt is deleted: true
+2025-04-29 02:29:58 INFO  CallbackHandlerImpl:347 - File C:\SimpleReminderSavedText\1577747853_4120_Алексей-Михайлов.txt is deleted: true
+2025-04-29 02:30:04 INFO  CallbackHandlerImpl:347 - File C:\SimpleReminderSavedVoice\1577747853_4166_Алексей-Михайлов.ogg is deleted: true
+2025-04-29 02:30:04 INFO  CallbackHandlerImpl:382 - All reminders is deleted
+2025-04-29 16:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-29 16:01:17 INFO  CallbackHandlerImpl:347 - File C:\SimpleReminderSavedText\1577747853_4194_Алексей-Михайлов.txt is deleted: true
+2025-04-29 16:01:27 INFO  CallbackHandlerImpl:347 - File C:\SimpleReminderSavedVoice\1577747853_4202_Алексей-Михайлов.ogg is deleted: true
+2025-04-29 16:01:28 INFO  CallbackHandlerImpl:382 - All reminders is deleted
+2025-04-29 17:00:00 INFO  ReminderScheduler:59 - Deleted 0 reminders
+2025-04-30 00:11:00 INFO  ReminderScheduler:37 - Reminder started at 2025-04-30T00:11:00.123067900
+2025-04-30 00:11:00 INFO  ReminderScheduler:45 - File C:\SimpleReminderSavedText\1577747853_4235_Алексей-Михайлов.txt is deleted: true
+2025-04-30 00:15:38 INFO  CallbackHandlerImpl:364 - File C:\SimpleReminderSavedVoice\1577747853_4243_Алексей-Михайлов.ogg is deleted: true
+2025-04-30 00:53:06 INFO  CallbackHandlerImpl:364 - File C:\SimpleReminderSavedText\1577747853_4278_Алексей-Михайлов.txt is deleted: true
+2025-04-30 01:00:00 INFO  ReminderScheduler:59 - Deleted 1 reminders
+2025-04-30 01:06:42 INFO  CallbackHandlerImpl:364 - File C:\SimpleReminderSavedText\1577747853_4251_Алексей-Михайлов.txt is deleted: true
+2025-04-30 01:06:45 INFO  CallbackHandlerImpl:364 - File C:\SimpleReminderSavedText\1577747853_4261_Алексей-Михайлов.txt is deleted: true
+2025-04-30 01:06:45 INFO  CallbackHandlerImpl:399 - All reminders is deleted
