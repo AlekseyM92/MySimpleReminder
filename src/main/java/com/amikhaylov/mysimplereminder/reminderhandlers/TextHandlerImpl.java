@@ -18,6 +18,7 @@ import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import lombok.extern.log4j.Log4j;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class TextHandlerImpl implements TextHandler {
         Chat chat = message.getChat();
         Long chatId = chat.getId();
         String text = message.getText();
+        List<Reminder> reminders = new ArrayList<>();
         if (simpleReminderBot.getUserDataCache().getUserState(chatId) == BotStatus.DEFAULT) {
             switch (text) {
                 case "/start":
@@ -72,7 +74,7 @@ public class TextHandlerImpl implements TextHandler {
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.MY_REMINDERS);
                     answerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
                     answerMessage.deleteLastBotMessageIfPresent(message, simpleReminderBot);
-                    List<Reminder> reminders = reminderRepositoryService.findAllUserReminders(chatId)
+                    reminders = reminderRepositoryService.findAllUserReminders(chatId)
                             .stream()
                             .filter(reminder -> !reminder.isDelivered())
                             .sorted(new Comparator<Reminder>() {
@@ -80,6 +82,8 @@ public class TextHandlerImpl implements TextHandler {
                                 public int compare(Reminder o1, Reminder o2) {
                                     if (o1.getSendDateTime().isAfter(o2.getSendDateTime())) {
                                         return 1;
+                                    } else if (o1.getSendDateTime().isBefore(o2.getSendDateTime())) {
+                                        return -1;
                                     }
                                     return 0;
                                 }
@@ -92,18 +96,31 @@ public class TextHandlerImpl implements TextHandler {
                                         "Вы соможете изменить дату напоминая либо удалить его.\n" +
                                         "Для продолжения нажмите \"Далее\" либо \"Отмена\" для выхода."
                                 , reminderInlineKeyboards.getKeyboard("all_reminders"));
-                    } else if (reminders.isEmpty()) {
+                    } else {
                         simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
                         answerMessage.answerMessage(message, simpleReminderBot
                                 , "У вас нет запланированных напоминаний!");
                     }
                     break;
                 case "/delete_all_reminders":
-                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
+                    simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DELETE_ALL_REMINDERS);
                     answerMessage.deleteUserErrorMessageIfPresent(message, simpleReminderBot);
                     answerMessage.deleteLastBotMessageIfPresent(message, simpleReminderBot);
-                    answerMessage.answerMessage(message, simpleReminderBot
-                            , "Вы нажали /delete_all_reminders");
+                    reminders = reminderRepositoryService.findAllUserReminders(chatId)
+                            .stream()
+                            .filter(reminder -> !reminder.isDelivered())
+                            .toList();
+                    if (!reminders.isEmpty()) {
+                        simpleReminderBot.getUserDataCache().setUserReminders(chatId, reminders);
+                        answerMessage.answerMessage(message, simpleReminderBot
+                                , "Все напоминания будут удалены, без возможности восстановления!\n" +
+                                        "Хотите продолжить?"
+                                , reminderInlineKeyboards.getKeyboard("delete_all_reminders"));
+                    } else {
+                        simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
+                        answerMessage.answerMessage(message, simpleReminderBot
+                                , "У вас нет запланированных напоминаний!");
+                    }
                     break;
                 case "/help":
                     simpleReminderBot.getUserDataCache().setUserState(chatId, BotStatus.DEFAULT);
@@ -210,6 +227,23 @@ public class TextHandlerImpl implements TextHandler {
                 answerMessage.deleteMessage(message, simpleReminderBot);
                 answerMessage.sendErrorMessage(message
                         , "Отправка сообщений в этом режиме запрещена!\nНажмите \"Далее\" для продолжения" +
+                                " или \"Отмена\" для выхода из этого режима."
+                        , simpleReminderBot);
+            }
+        } else if (simpleReminderBot.getUserDataCache().getUserState(chatId) == BotStatus.DELETE_ALL_REMINDERS) {
+            if (simpleReminderBot.getMenuCommands()
+                    .getListOfCommands().stream()
+                    .map(BotCommand::getCommand).toList().contains(text.substring(1))) {
+                answerMessage.deleteMessage(message, simpleReminderBot);
+                answerMessage.sendErrorMessage(message
+                        , "Отправка команд в этом режиме запрещена!" +
+                                " Нажмите \"Отмена\" для выхода из данного режима. " +
+                                "или нажмите \"Удалить всё\" для завершения удаления", simpleReminderBot);
+            } else {
+                answerMessage.deleteMessage(message, simpleReminderBot);
+                answerMessage.sendErrorMessage(message
+                        , "Отправка сообщений в этом режиме запрещена!\nНажмите \"Удалить всё\" " +
+                                "для завершения удаления" +
                                 " или \"Отмена\" для выхода из этого режима."
                         , simpleReminderBot);
             }

@@ -72,6 +72,8 @@ public class ReminderInlineButtons {
                 .callbackData("edit_reminder").build());
         addButton("delete_reminder", InlineKeyboardButton.builder().text("Удалить")
                 .callbackData("delete_reminder").build());
+        addButton("delete_all_reminders", InlineKeyboardButton.builder().text("Удалить всё")
+                .callbackData("delete_all_reminders").build());
     }
 
     public void addButton(String callbackData, InlineKeyboardButton button) {

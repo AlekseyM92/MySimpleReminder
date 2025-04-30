@@ -26,6 +26,15 @@ public class ReminderInlineKeyboards {
     public ReminderInlineKeyboards(ReminderInlineButtons reminderInlineButtons) {
         this.reminderInlineButtons = reminderInlineButtons;
         this.keyboards = new HashMap<>();
+        addKeyboard("delete_all_reminders", InlineKeyboardMarkup.builder()
+                .keyboardRow(this.reminderInlineButtons.getButtons()
+                        .stream()
+                        .filter(button ->
+                                button.getCallbackData().equals("cancel")
+                                        || button.getCallbackData().equals("delete_all_reminders"))
+                        .collect(Collectors.toList())
+                ).build()
+        );
         addKeyboard("/create_reminder_1", InlineKeyboardMarkup.builder()
                 .keyboardRow(this.reminderInlineButtons.getButtons()
                         .stream()

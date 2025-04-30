@@ -442,6 +442,23 @@ public class CallbackHandlerImpl implements CallbackHandler {
                         );
                     }
                     break;
+                case "delete_all_reminders":
+                    answerCallback.answerCallback(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteUserErrorMessageIfPresent(callbackQuery, simpleReminderBot);
+                    answerCallback.deleteCallbackMessage(callbackQuery, simpleReminderBot);
+                    reminders = simpleReminderBot.getUserDataCache().getUserReminders(chatId);
+                    for (Reminder reminder : reminders) {
+                        File file = new File(reminder.getFilePath());
+                        if (file.exists()) {
+                            var isDeleted = file.delete();
+                            log.info("File " + reminder.getFilePath() + " is deleted: " + isDeleted);
+                        }
+                    }
+                    reminderRepositoryService.deleteReminders(reminders);
+                    answerMessage.answerMessage(callbackQuery, simpleReminderBot
+                            , "Все напоминаня удалены!");
+                    simpleReminderBot.getUserDataCache().resetUserCache(chatId);
+                    break;
             }
         }
     }
